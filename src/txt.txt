@@ -1,0 +1,67 @@
+import { useState } from "react";
+import UploadFile from "./UploadFile";
+import { Navbar } from "../components/Navbar";
+import { FaUpload, FaChartBar, FaUser, FaChevronLeft, FaChevronRight, FaHome } from "react-icons/fa";
+import { Home } from "./Home";
+import { B2B } from "./B2B";
+import { B2C } from "./B2C";
+import { Profile } from "./Profile";
+
+const Dashboard = () => {
+    const [activeSection, setActiveSection] = useState("home");
+    const [isCollapsed, setIsCollapsed] = useState(true);
+
+    return (
+        <div className="flex  w-screen overflow-visible justify-start items-start">
+            {/* Fixed Left Sidebar */}
+            <div className={`  text-white flex flex-col  p-4 fixed  bg-white z-30 transition-all duration-300 ${isCollapsed ? 'w-20 h-full' : 'w-64 h-full'}`}>
+            <div className="flex flex-col flex-grow gap-8 justify-center">
+                    <button
+                        className="py-3 px-4  flex items-center justify-center bg-red-600 rounded"
+                        onClick={() => setIsCollapsed(!isCollapsed)}
+                    >
+                        {isCollapsed ? <FaChevronRight size={16} /> : <FaChevronLeft size={16} />}
+                    </button>
+
+
+                    <button className="py-3 px-4 flex items-center gap-4 border-2 border-red-600 rounded  justify-left " onClick={() => setActiveSection("upload")}>
+                        <FaUpload size={16} color="red" /> {!isCollapsed && <span className="text-red-600 font-medium">Upload</span>}
+                    </button>
+                    <button className="py-3 px-4  flex items-center gap-4 bg-red-600 rounded justify-left" onClick={() => setActiveSection("home")}>
+                        <FaHome size={16} /> {!isCollapsed && <span className="text-white font-medium">Home</span>}
+                    </button>
+
+                    {/* <h3 className={`font-medium text-xl ${isCollapsed ? 'hidden' : ''}`}>Reports</h3> */}
+                    <button className="py-3 px-4  flex items-center gap-4 bg-red-600 rounded justify-left" onClick={() => setActiveSection("b2b")}>
+                        <FaChartBar size={16} /> {!isCollapsed && <span className="text-white font-medium">B2B</span>}
+                    </button>
+                    <button className="py-3 px-4  flex items-center gap-4 bg-red-600 rounded justify-left" onClick={() => setActiveSection("b2c")}>
+                        <FaChartBar size={16} /> {!isCollapsed && <span className="text-white font-medium">B2C</span>}
+                    </button>
+                    <button className="py-3 px-4  flex items-center gap-4 bg-red-600 rounded justify-left" onClick={() => setActiveSection("profile")}>
+                        <FaUser size={16} /> {!isCollapsed && <span className="text-white font-medium">Profile</span>}
+                    </button>
+
+                </div>
+
+            </div>
+
+            {/* Fixed Right Content Wrapper */}
+            <div className={`flex flex-col fixed right-0 top-0 h-screen transition-all duration-300 bg-white overflow-hidden ${isCollapsed ? 'w-[calc(100%-5rem)]' : 'w-[calc(100%-16rem)]'}`}>
+                {/* Navbar */}
+                {/* <Navbar /> */}
+
+                {/* Scrollable Content */}
+                <div className="px-6 mt-0 overflow-auto h-full">
+                    {activeSection === "upload" && <UploadFile />}
+                    {activeSection === "home" && <Home />}
+                    {activeSection === "b2b" && <B2B />}
+                    {activeSection === "b2c" && <B2C />}
+                    {activeSection === "profile" && <Profile />}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;

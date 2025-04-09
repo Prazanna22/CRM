@@ -1,0 +1,130 @@
+import { useState, useEffect } from "react";
+
+export const OutsourceDB = () => {
+    const [tableData, setTableData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [filter, setFilter] = useState("year");
+    // const [sortOrder, setSortOrder] = useState("asc");
+
+
+
+   
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://53a2-49-204-143-231.ngrok-free.app/food_APP/outsource/", {
+
+                    method: "GET",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "ngrok-skip-browser-warning": "true"
+                    },
+                })
+                const res = await response.json();
+                console.log("FULL Response:", res);
+                setTableData(Array.isArray(res) ? res : []);
+            } catch (err) {
+                console.error("Error fetching data:", err);
+                setError(err.message || "Failed to load data.");
+            }
+            finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+
+
+    if (loading) return <div className="flex justify-center items-center h-screen w-full">
+        <p className="text-center p-4 ">Loading...</p>
+    </div>;
+    if (error) return; <div className="flex justify-center items-center h-screen w-full">
+        <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
+    </div>
+
+    const filteredData = tableData.filter((row) => {
+        const createdData = new Date(row.created_at);
+        const now = new Date();
+
+        if (filter === "today") {
+            return createdData.toDateString() === now.toDateString();
+        }
+        else if (filter === "month") {
+            return createdData.getMonth() === now.getMonth() && createdData.getFullYear() === now.getFullYear()
+        }
+        else if (filter === "year") {
+            return createdData.getFullYear() === now.getFullYear()
+        }
+        return true;
+    })
+
+
+    return (
+        <div className="p-4 mt-20">
+            
+           <div className="flex justify-between">
+           <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-2 px-4 my-2 ">
+                <option value="year" className="  bg-black">This Year</option>
+                <option value="month" className=" bg-black">This Month</option>
+                <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
+            </select>
+            <div className="">
+            <button className="bg-white text-black px-4 py-2 rounded hover:bg-green-700 my-2 mr-4">
+                Schedule Call
+            </button>
+            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 ">
+                Start Call
+            </button>
+            </div>
+           </div>
+
+            <div className="overflow-x-auto">
+                <div className="max-h-[75vh] overflow-y-auto border border-gray-300">
+                    <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
+                        <thead className="bg-gray-200 sticky top-0 z-10">
+                            <tr>
+                                {[
+                                    "Name", "Organization", "Designation", "Address",
+                                    "Contact Number", "Email", "Status", "Source",
+                                    "Created At"
+                                ].map((header, index) => (
+                                    <th key={index} className="px-3 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider whitespace-nowrap">
+                                        {header}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Array.isArray(filteredData) && filteredData.length > 0 ? (
+                                filteredData.map((row, index) => (
+                                    <tr key={index} className="hover:bg-gray-900">
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.name || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.org_name || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.designation || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.Address || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.contact_number}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.mail_id || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.source_come_from || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={9} className="text-center p-4 text-sm text-gray-500">
+                                        No data available
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
