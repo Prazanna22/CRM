@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import logo from '../assets/logo.webp'
+import robot from '../assets/robot.png'
 export const LoginPage = ({ setIsAuthenticated }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -68,7 +69,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                             {/* Inverted Corner (Top Right) */}
                             <div className="absolute top-10 right-10 xl:right-28 w-20 h-20 bg-black rounded-bl-3xl z-0  border-2 border-black tag" ></div>
                             <div className="absolute top-14 left-10 lg:left-28  mx-8" >
-                                <img src="src/assets/logo.webp" alt="img" className="w-36"/>
+                                <img src={logo} alt="img" className="w-36"/>
                             </div>
 
                             <div className="bg-green-700 text-white flex flex-col justify-center px-8 pt-16 pb-10 md:mx-10 xl:mx-28 mt-10 rounded-xl overflow-hidden border-2 border-green-700">
@@ -77,7 +78,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                 <div className="mt-10 py-6 bg-green-600 rounded-lg relative z-10 px-10 m">
                                     <div className="flex my-4 items-center justify-center">
                                         <h2 className="text-3xl font-bold z-10  ibm ">Welcome Back to <span className=" font-bold text-6xl leading-20 poppins  ">Sellient</span></h2>
-                                        <img src="src/assets/robot.png" alt="" className="w-28 h-28   " />
+                                        <img src={robot} alt="" className="w-60 h-32   " />
                                         {/* <div className=" flex items-center justify-center">
                                       
                                     </div> */}
