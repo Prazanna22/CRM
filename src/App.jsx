@@ -24,13 +24,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </Router>
-        // <>
-        //     <div className=" ">
-        //         <Navbar />
-        //         <Dashboard />
-        //         <LoginPage />
-        //     </div>
-        // </>
+       
     );
 }
 

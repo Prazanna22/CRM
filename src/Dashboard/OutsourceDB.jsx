@@ -19,7 +19,7 @@ export const OutsourceDB = () => {
           const result = await response.json();
       
           if (response.ok) {
-            alert(result.message || "Call process triggered successfully.");
+            alert( "Call process triggered successfully.");
             console.log("Call result:", result);
           } else {
             alert("Failed to trigger call process.");
@@ -41,7 +41,7 @@ export const OutsourceDB = () => {
           const result = await response.json();
       
           if (response.ok) {
-            alert(result.message || "Call process stopped successfully.");
+            alert( "Call process stopped successfully.");
           } else {
             alert("Failed to stop the call process.");
           }
