@@ -8,28 +8,29 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
-        // <Router>
-        //     <Routes>
-
-        //         <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
-
-
-        //         <Route 
-        //             path="/dashboard" 
-        //             element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
-        //         />
+        <Router>
+             
+            <Routes>
+           
+                <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
 
 
-        //         <Route path="*" element={<Navigate to="/login" />} />
-        //     </Routes>
-        // </Router>
-        <>
-            <div className="bg-black ">
-                <Navbar />
-                <Dashboard />
-                {/* <LoginPage /> */}
-            </div>
-     </> 
+                <Route 
+                    path="/dashboard" 
+                    element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
+                />
+
+
+                <Route path="*" element={<Navigate to="/login" />} />
+            </Routes>
+        </Router>
+        // <>
+        //     <div className=" ">
+        //         <Navbar />
+        //         <Dashboard />
+        //         <LoginPage />
+        //     </div>
+        // </>
     );
 }
 

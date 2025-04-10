@@ -9,7 +9,36 @@ export const B2B = () => {
     const [sortOrder, setSortOrder] = useState("asc");
     const [filter, setFilter] = useState("year");
 
+    // const handleExport = async () => {
+    //     try {
+    //         const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/export_b2b/", {
+    //             method: "GET",
+    //             headers: {
+    //                 "ngrok-skip-browser-warning": "true",
+    //             }
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error("Failed to export file");
+    //         }
+
+    //         const blob = await response.blob();
+    //         const url = window.URL.createObjectURL(blob);
+    //         const a = document.createElement("a");
+    //         a.href = url;
+    //         a.download = "B2B_Leads.xlsx"; // or whatever name you want
+    //         document.body.appendChild(a);
+    //         a.click();
+    //         a.remove();
+    //         window.URL.revokeObjectURL(url);
+    //     } catch (error) {
+    //         console.error("Export error:", error);
+    //         alert("Failed to download export file.");
+    //     }
+    // };
     const exportToExcel = (data, fileName = "ExportedData") => {
+
+
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
@@ -23,7 +52,7 @@ export const B2B = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://53a2-49-204-143-231.ngrok-free.app/food_APP/get_b2b/", {
+                const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/get_b2b/", {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -45,11 +74,11 @@ export const B2B = () => {
     }, []);
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-    <p className="text-center p-4 ">Loading...</p>
-</div>;
-if (error) return; <div className="flex justify-center items-center h-screen w-full">
-    <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
-</div>
+        <p className="text-center p-4 ">Loading...</p>
+    </div>;
+    if (error) return; <div className="flex justify-center items-center h-screen w-full">
+        <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
+    </div>
 
     const handleSort = () => {
         const sortedData = [...tableData].sort((a, b) => {
@@ -76,12 +105,12 @@ if (error) return; <div className="flex justify-center items-center h-screen w-f
         }
         return true;
     })
-   
+
 
     return (
         <div className="p-4 mt-20">
             <button
-                onClick={() => exportToExcel(filteredData, "B2B_Leads")}
+               onClick={() => exportToExcel(filteredData, "B2C_Leads")}
                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 mr-4"
             >
                 Export file

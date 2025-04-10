@@ -5,16 +5,57 @@ export const OutsourceDB = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filter, setFilter] = useState("year");
-    // const [sortOrder, setSortOrder] = useState("asc");
+    
 
-
-
-   
-
+    const startCall = async () => {
+        try {
+          const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/call-ai-agent/", {
+            method: "GET",
+            headers: {
+              "ngrok-skip-browser-warning": "true"
+            }
+          });
+      
+          const result = await response.json();
+      
+          if (response.ok) {
+            alert(result.message || "Call process triggered successfully.");
+            console.log("Call result:", result);
+          } else {
+            alert("Failed to trigger call process.");
+          }
+        } catch (error) {
+          console.error("Error starting call process:", error);
+          alert("An error occurred while starting the call process.");
+        }
+      };
+      const stopCall = async () => {
+        try {
+          const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/stop-call/", {
+            method: "GET",
+            headers: {
+              "ngrok-skip-browser-warning": "true"
+            }
+          });
+      
+          const result = await response.json();
+      
+          if (response.ok) {
+            alert(result.message || "Call process stopped successfully.");
+          } else {
+            alert("Failed to stop the call process.");
+          }
+        } catch (error) {
+          console.error("Error stopping call process:", error);
+          alert("An error occurred while trying to stop the call process.");
+        }
+      };
+      
+      
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://53a2-49-204-143-231.ngrok-free.app/food_APP/outsource/", {
+                const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/outsource/", {
 
                     method: "GET",
                     headers: {
@@ -66,16 +107,16 @@ export const OutsourceDB = () => {
         <div className="p-4 mt-20">
             
            <div className="flex justify-between">
-           <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-2 px-4 my-2 ">
+           <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-1 px-4 my-2 ">
                 <option value="year" className="  bg-black">This Year</option>
                 <option value="month" className=" bg-black">This Month</option>
                 <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
             </select>
             <div className="">
-            <button className="bg-white text-black px-4 py-2 rounded hover:bg-green-700 my-2 mr-4">
-                Schedule Call
+            <button className="bg-red-600 text-white px-4 py-1 text-md rounded hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
+                Stop Call
             </button>
-            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 ">
+            <button className="bg-green-600 text-white px-4 py-1 text-md rounded hover:bg-green-700 my-2 " onClick={startCall}>
                 Start Call
             </button>
             </div>
