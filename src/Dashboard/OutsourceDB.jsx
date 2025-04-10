@@ -32,7 +32,7 @@ export const OutsourceDB = () => {
       const stopCall = async () => {
         try {
           const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/stop-call/", {
-            method: "GET",
+            method: "POST",
             headers: {
               "ngrok-skip-browser-warning": "true"
             }
