@@ -21,9 +21,10 @@ export const LoginPage = ({ setIsAuthenticated }) => {
         }
     };
 
+
     useEffect(() => {
         AOS.init({ duration: 800, once: true });
-      }, []);
+    }, []);
     return (
         <>
             <div className="relative h-screen flex items-center justify-center  bg-black">
@@ -35,39 +36,47 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                     <h2 className="text-lg font-semibold text-white text-left px-6 md:px-10 py-10 md:py-2">Hogist</h2> */}
                     <div className="flex items-center justify-center">
                         {/* form */}
+
                         <div className="w-1/2 flex flex-col justify-center items-center p-10 ">
                             <h1 className="mb-1 text-gray-300 text-center font-extrabold text-3xl " data-aos="fade-right" data-aos-delay="100">Login</h1>
                             <div className=" p-8 rounded-xl w-80 md:w-96 text-white">
 
-
-                                {error && <p className="text-red-500 mb-3">{error}</p>}
-                                <div className="flex flex-col gap-3" data-aos="fade-right" data-aos-delay="200">
-                                    <label htmlFor="email" className="">User Id</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter the User Id"
-                                        className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none "
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-3" data-aos="fade-right" data-aos-delay="300">
-                                    <label htmlFor="password">Password</label>
-                                    <input
-                                        type="password"
-                                        placeholder="Enter the Password"
-                                        className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none "
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                                {/* <p className="text-right text-sm text-gray-400 cursor-pointer hover:underline">Forgot Password</p> */}
-                                <button
-                                    onClick={handleLogin}
-                                    className="w-full mt-4 bg-green-600 text-white p-3 rounded-xl hover:bg-green-700"data-aos="fade-right" data-aos-delay="400"
+                                <form
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                        handleLogin();
+                                    }}
+                                    className="p-8 rounded-xl w-80 md:w-96 text-white"
                                 >
-                                    Sign in
-                                </button>
+                                    {error && <p className="text-red-500 mb-3">{error}</p>}
+                                    <div className="flex flex-col gap-3" data-aos="fade-right" data-aos-delay="200">
+                                        <label htmlFor="email" className="">User Id</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Enter the User Id"
+                                            className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none "
+                                            value={username}
+                                            onChange={(e) => setUsername(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-3" data-aos="fade-right" data-aos-delay="300">
+                                        <label htmlFor="password">Password</label>
+                                        <input
+                                            type="password"
+                                            placeholder="Enter the Password"
+                                            className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none "
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                    </div>
+                                    {/* <p className="text-right text-sm text-gray-400 cursor-pointer hover:underline">Forgot Password</p> */}
+                                    <button
+                                        onClick={handleLogin}
+                                        className="w-full mt-4 bg-green-600 text-white p-3 rounded-xl hover:bg-green-700" data-aos="fade-right" data-aos-delay="400"
+                                    >
+                                        Sign in
+                                    </button>
+                                </form>
 
                             </div>
                         </div>
