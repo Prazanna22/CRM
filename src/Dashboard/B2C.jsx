@@ -82,7 +82,7 @@ export const B2C = () => {
 
     return (
         <div className="px-4 ">
-              <h1 className="font-bold text-4xl text-green-600 text-center py-5">Business to Client Database</h1>
+              <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2C</h1>
             <button
                 onClick={() => exportToExcel(filteredData, "B2C_Leads")}
                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 mr-4"
