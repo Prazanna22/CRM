@@ -15,46 +15,45 @@ const Dashboard = () => {
         <>
             <Navbar />
             <div className="flex  w-screen overflow-visible justify-start items-start ibm">
-                {/* Fixed Left Sidebar */}
-                <div className={`text-white flex flex-col justify-between py-6 px-4 fixed  bg-black z-30 transition-all duration-300 ${isCollapsed ? 'w-20 h-full' : 'w-64 h-full'}`}>
+                <div className={`text-white flex flex-col justify-between px-2 fixed  bg-black border-r-2 border-white  z-30 transition-all duration-300 ${isCollapsed ? 'w-20 h-full' : 'w-64 h-full'}`}>
 
-                    {/* Top Section (Expandable buttons) */}
-                    <div className="flex flex-col flex-grow gap-8 mt-5">
+                    <div className="flex flex-col flex-grow gap-8 mt-5  ">
                         <button
-                            className="py-3 px-4 flex items-center justify-center bg-green-600 rounded"
+                            className="py-2 px-4 my-2 flex items-center justify-center rounded "
                             onClick={() => setIsCollapsed(!isCollapsed)}
                         >
-                            {isCollapsed ? <FaChevronRight size={16} /> : <FaChevronLeft size={16} />}
+                            {isCollapsed ? <FaChevronRight size={20} /> : <FaChevronLeft size={20} />}
                         </button>
 
-                        <button className={`py-3 px-4 flex items-center gap-4 rounded justify-left ${activeSection === "upload" ? "bg-white text-green-600" : "bg-green-600 text-white"
+                        <button className={`py-2 pl-4 flex items-center gap-4 my-2 justify-left ${activeSection === "upload" ? "border-l-4 border-green-600 text-green-600 " : "border-l-4 border-black text-white"
                             }`}
                             onClick={() => setActiveSection("upload")}>
-                            <FaUpload size={16} /> {!isCollapsed && <span className=" font-medium">Upload</span>}
+                            <FaUpload size={20} /> {!isCollapsed && <span className=" font-medium">Upload</span>}
                         </button>
 
-                        <button className={`py-3 px-4 flex items-center gap-4 rounded justify-left ${activeSection === "home" ? "bg-white text-green-600" : "bg-green-600 text-white"
+                        <button className={`py-2 pl-4 flex items-center gap-4 my-2 justify-left ${activeSection === "home" ? "border-l-4 border-green-600 text-green-600 " : "border-l-4 border-black text-white"
                             }`}
                             onClick={() => setActiveSection("home")}>
-                            <FaHome size={16} /> {!isCollapsed && <span className=" font-medium">Home</span>}
+                            <FaHome size={20} /> {!isCollapsed && <span className=" font-medium">Home</span>}
                         </button>
 
-                        <button className={`py-3 px-4 flex items-center gap-4 rounded justify-left ${activeSection === "b2b" ? "bg-white text-green-600" : "bg-green-600 text-white"
+                        <button className={`py-2 pl-4 flex items-center gap-4 my-2  justify-left ${activeSection === "b2b" ? "border-l-4 border-green-600 text-green-600 " : "border-l-4 border-black text-white"
                             }`}
                             onClick={() => setActiveSection("b2b")}>
-                            <FaChartBar size={16} /> {!isCollapsed && <span className=" font-medium">B2B</span>}
+                            <FaChartBar size={20} /> {!isCollapsed && <span className=" font-medium">B2B</span>}
                         </button>
 
-                        <button className={`py-3 px-4 flex items-center gap-4 rounded justify-left ${activeSection === "b2c" ? "bg-white text-green-600" : "bg-green-600 text-white"
+                        <button className={`py-2 pl-4 flex items-center gap-4 my-2 justify-left ${activeSection === "b2c" ? "border-l-4 border-green-600 text-green-600 " : "border-l-4 border-black text-white"
                             }`}
                             onClick={() => setActiveSection("b2c")}>
-                            <FaChartBar size={16} /> {!isCollapsed && <span className=" font-medium">B2C</span>}
+                            <FaChartBar size={20} /> {!isCollapsed && <span className=" font-medium">B2C</span>}
                         </button>
-                        <button className={`py-3 px-4 flex items-center gap-4 rounded justify-left ${activeSection === "outsource" ? "bg-white text-green-600" : "bg-green-600 text-white"
+                        <button className={`py-2 pl-4 flex items-center gap-4 my-2   justify-left ${activeSection === "outsource" ? "border-l-4 border-green-600 text-green-600 " : "border-l-4 border-black text-white"
                             }`}
                             onClick={() => setActiveSection("outsource")}>
-                            <FaChartBar size={16} /> {!isCollapsed && <span className=" font-medium">OutSourceDB</span>}
+                            <FaChartBar size={20} /> {!isCollapsed && <span className=" font-medium">OutSourceDB</span>}
                         </button>
+                        
                     </div>
                 </div>
 

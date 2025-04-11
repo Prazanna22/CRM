@@ -9,7 +9,7 @@ export const OutsourceDB = () => {
 
     const startCall = async () => {
         try {
-          const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/call-ai-agent/", {
+          const response = await fetch("https://30e6-49-205-86-196.ngrok-free.app/food_APP/call-ai-agent/", {
             method: "GET",
             headers: {
               "ngrok-skip-browser-warning": "true"
@@ -31,7 +31,7 @@ export const OutsourceDB = () => {
       };
       const stopCall = async () => {
         try {
-          const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/stop-call/", {
+          const response = await fetch("https://30e6-49-205-86-196.ngrok-free.app/food_APP/stop-call/", {
             method: "POST",
             headers: {
               "ngrok-skip-browser-warning": "true"
@@ -55,7 +55,7 @@ export const OutsourceDB = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://f30b-49-204-133-60.ngrok-free.app/food_APP/outsource/", {
+                const response = await fetch("https://30e6-49-205-86-196.ngrok-free.app/food_APP/outsource/", {
 
                     method: "GET",
                     headers: {
