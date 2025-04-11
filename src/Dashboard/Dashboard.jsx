@@ -18,17 +18,25 @@ const Dashboard = () => {
     const [isCollapsed, setIsCollapsed] = useState(true);
     const [isActive, setIsActive] = useState(false);
     const profileRef = useRef(null);
+    const popupRef = useRef(null);
+
     const navigate = useNavigate();
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (profileRef.current && !profileRef.current.contains(event.target)) {
-                setIsActive(false);
-            }
+          if (
+            profileRef.current &&
+            !profileRef.current.contains(event.target) &&
+            popupRef.current &&
+            !popupRef.current.contains(event.target)
+          ) {
+            setIsActive(false);
+          }
         };
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+      }, []);
+      
 
     const handleLogout = () => {
         localStorage.removeItem("isLoggedIn");
@@ -190,7 +198,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         {isActive && (
-                            <div className="fixed left-[1.5rem] -bottom-6 translate-y-[-100%] w-42 bg-[#1f1f1f] text-white rounded-lg shadow-xl z-[9999]">
+                            <div className="fixed left-[1.5rem] -bottom-6 translate-y-[-100%] w-42 bg-[#1f1f1f] text-white rounded-lg shadow-xl z-[9999]" ref={popupRef}>
                                 <div className="p-4 border-b border-gray-700">
                                     <p className="text-sm font-medium text-gray-300">Hogist</p>
                                 </div>
