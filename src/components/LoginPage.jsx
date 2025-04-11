@@ -11,6 +11,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
 
     const handleLogin = () => {
         if (username === "hogist" && password === "123456") {
+            localStorage.setItem("isLoggedIn", "true");
             setIsAuthenticated(true);
             navigate("/dashboard");
         } else {
@@ -31,10 +32,10 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                     <div className="flex items-center justify-center">
                         {/* form */}
                         <div className="w-1/2 flex flex-col justify-center items-center p-10">
-                        <h1 className="mb-1 text-gray-300 text-center font-extrabold text-3xl ">Login</h1>
+                            <h1 className="mb-1 text-gray-300 text-center font-extrabold text-3xl ">Login</h1>
                             <div className=" p-8 rounded-xl w-80 md:w-96 text-white">
 
-                                
+
                                 {error && <p className="text-red-500 mb-3">{error}</p>}
                                 <div className="flex flex-col gap-3">
                                     <label htmlFor="email" className="">User Id</label>

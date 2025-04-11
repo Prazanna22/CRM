@@ -18,6 +18,13 @@ export const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login");
+    window.location.reload(); // ⬅️ reload to reset state in App
+  };
+
+
   return (
     <>
       <div className="shadow-white shadow-2xs text-white font-bold text-center z-50 sticky top-0 py-6 px-6 ibm bg-black">
@@ -38,9 +45,13 @@ export const Navbar = () => {
                   <FaUser size={16} />
                   <span className="font-semibold">Hogist</span>
                 </div>
-                <button className="w-full text-left flex items-center gap-2 py-2 px-3 rounded-md bg-green-600 text-white hover:bg-green-700" onClick={()=>navigate('/login')}>
-                  <FiLogOut size={16}/>Log out
+                <button
+                  className="w-full text-left flex items-center gap-2 py-2 px-3 rounded-md bg-green-600 text-white hover:bg-green-700"
+                  onClick={handleLogout}
+                >
+                  <FiLogOut size={16} /> Log out
                 </button>
+
               </div>
             )}
           </div>
