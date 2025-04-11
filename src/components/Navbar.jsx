@@ -29,8 +29,12 @@ export const Navbar = () => {
     <>
       <div className="shadow-white shadow-2xs text-white font-bold text-center z-50 sticky top-0 py-6 px-6 ibm bg-black">
         <div className="flex justify-between items-center px-4">
-          <div></div>
-          <h1 className="whitespace-nowrap text-3xl">HOGIST</h1>
+          <div className=""></div>
+          <div >
+            <h1 className="whitespace-nowrap text-2xl ">SELLIENT – Hogist’s Voice AI CRM</h1>
+            <h1 className="whitespace-nowrap text-md italic font-normal">From First Hello to Final Deal — Seamlessly.</h1>
+          </div>
+          {/* <h1 className="whitespace-nowrap text-3xl">SELLIENT - YOUR AI AGENT DASHBOARD. POWERED BY HOGIST</h1> */}
           <div className="relative" ref={profileRef}>
             <button
               className="py-2 px-2 flex items-center gap-2 bg-green-600 rounded-full"

@@ -104,8 +104,8 @@ export const OutsourceDB = () => {
 
 
     return (
-        <div className="p-4 mt-20">
-            
+        <div className="px-4 ">
+            <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
            <div className="flex justify-between">
            <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-1 px-4 my-2 ">
                 <option value="year" className="  bg-black">This Year</option>
@@ -123,7 +123,7 @@ export const OutsourceDB = () => {
            </div>
 
             <div className="overflow-x-auto">
-                <div className="max-h-[75vh] overflow-y-auto border border-gray-300">
+                <div className="max-h-[77vh] overflow-y-auto border border-gray-300">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
                         <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>

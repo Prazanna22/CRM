@@ -108,7 +108,8 @@ export const B2B = () => {
 
 
     return (
-        <div className="p-4 mt-20">
+        <div className="px-4">
+              <h1 className="font-bold text-4xl text-green-600 text-center py-5">Business to Business Database</h1>
             <button
                onClick={() => exportToExcel(filteredData, "B2C_Leads")}
                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 mr-4"
@@ -121,7 +122,7 @@ export const B2B = () => {
                 <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
             </select>
             <div className="overflow-x-auto">
-                <div className="max-h-[75vh]  border border-gray-300 overflow-y-auto">
+                <div className="max-h-[77vh]  border border-gray-300 overflow-y-auto">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
                         <thead className="bg-gray-200 sticky top-0  z-10">
                             <tr>

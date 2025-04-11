@@ -12,7 +12,8 @@ function App() {
     }, []);
 
     return (
-        <Router>
+        <div className="bg-black">
+            <Router>
             <Routes>
                 <Route
                     path="/login"
@@ -33,6 +34,7 @@ function App() {
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </Router>
+        </div>
     );
 }
 

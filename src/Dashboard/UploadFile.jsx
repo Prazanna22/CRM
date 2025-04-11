@@ -68,10 +68,12 @@ const UploadFile = () => {
       {/* <button onClick={() => setActiveSection("dashboard")} className="mb-4 px-4 py-2 bg-gray-600 text-white rounded">
         Back to Dashboard
       </button> */}
+           <h1 className="font-bold text-4xl text-green-600 text-center  my-10">Upload file</h1>
       <div
         {...getRootProps()}
         className="w-96 h-48 border-2 border-dashed border-gray-500 flex items-center justify-center cursor-pointer"
       >
+        
         <input {...getInputProps()} />
         {file ? <p>{file.name}</p> : <p>Drag & Drop Excel File Here</p>}
       </div>

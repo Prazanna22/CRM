@@ -46,7 +46,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                     <input
                                         type="text"
                                         placeholder="Enter the User Id"
-                                        className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none italic"
+                                        className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none "
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
@@ -56,7 +56,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                     <input
                                         type="password"
                                         placeholder="Enter the Password"
-                                        className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none italic"
+                                        className="w-full p-3 mb-4 bg-white rounded-xl text-black outline-none "
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
