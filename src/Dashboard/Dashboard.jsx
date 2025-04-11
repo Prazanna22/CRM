@@ -19,10 +19,10 @@ const Dashboard = () => {
 
                     <div className="flex flex-col flex-grow gap-8 mt-5  ">
                         <button
-                            className="py-2 px-4 my-2 flex items-center justify-center rounded "
+                            className="py-2 px-4 my-2 flex items-center gap-4  justify-left "
                             onClick={() => setIsCollapsed(!isCollapsed)}
                         >
-                            {isCollapsed ? <FaChevronRight size={20} /> : <FaChevronLeft size={20} />}
+                            {isCollapsed ? <FaChevronRight size={20} /> : <FaChevronLeft size={20} />}{!isCollapsed && <span className=" font-medium">Close</span>}
                         </button>
 
                         <button className={`py-2 pl-4 flex items-center gap-4 my-2 justify-left ${activeSection === "upload" ? "border-l-4 border-green-600 text-green-600 " : "border-l-4 border-black text-white"
