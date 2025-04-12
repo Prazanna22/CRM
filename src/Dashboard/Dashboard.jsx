@@ -45,7 +45,7 @@ const Dashboard = () => {
     };
     const HandlefetchData = async () => {
         try {
-            const response = await fetch("https://30e6-49-205-86-196.ngrok-free.app/food_APP/process-vapi-responses/", {
+            const response = await fetch("https://d3ba-49-204-140-106.ngrok-free.app/food_APP/process-vapi-responses/", {
                 method: "GET",
                 headers: {
                     "ngrok-skip-browser-warning": "true"
@@ -69,8 +69,6 @@ const Dashboard = () => {
 
     return (
         <>
-
-
             <div className="flex  w-screen overflow-visible justify-start items-start ibm">
                 <div className={`text-white flex flex-col justify-between px-2 fixed bg-black  z-30 h-screen transition-all duration-300 ease-in-out ${isCollapsed ? 'w-22' : 'w-56'} overflow-hidden`}>
                     <div className="flex flex-col flex-grow gap-6 my-5 ml-4 overflow-visible justify-between bg-gray-800 rounded-2xl ">
@@ -212,10 +210,6 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         )}
-
-
-
-
                     </div>
                 </div>
 
