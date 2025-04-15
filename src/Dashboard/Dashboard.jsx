@@ -45,7 +45,7 @@ const Dashboard = () => {
     };
     const HandlefetchData = async () => {
         try {
-            const response = await fetch("https://d3ba-49-204-140-106.ngrok-free.app/food_APP/process-vapi-responses/", {
+            const response = await fetch("https://fe50-49-204-118-43.ngrok-free.app/food_APP/process-vapi-responses/", {
                 method: "GET",
                 headers: {
                     "ngrok-skip-browser-warning": "true"
