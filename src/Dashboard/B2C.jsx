@@ -81,20 +81,22 @@ export const B2C = () => {
         return true;
     })
 
-    const getStatusDot = (status) => {
+    const getStatusBadge = (status) => {
+        let baseClass = "text-white px-4 py-1 rounded-full text-xs font-semibold capitalize";
         switch (status?.toLowerCase()) {
             case "cold":
-                return <span className="inline-block w-3 h-3 rounded-full bg-red-700 mr-2"></span>;
+                return <span className={`${baseClass} bg-red-700 `}>Cold</span>;
             case "warm":
-                return <span className="inline-block w-3 h-3 rounded-full bg-orange-400 mr-2"></span>;
+                return <span className={`${baseClass} bg-orange-400`}>Warm</span>;
             case "hot":
-                return <span className="inline-block w-3 h-3 rounded-full bg-green-600 mr-2"></span>;
+                return <span className={`${baseClass} bg-green-600`}>Hot</span>;
             case "not interested":
-                return <span className="inline-block w-3 h-3 rounded-full bg-gray-200 mr-2"></span>;
+                return <span className={`${baseClass} bg-gray-500`}>Not Interested</span>;
             default:
-                return null;
+                return <span className={`${baseClass} bg-gray-600`}>N/A</span>;
         }
     };
+    
     
 
     return (
@@ -153,10 +155,7 @@ export const B2C = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.existing_menu_budget || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.prefered_menu_budget || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.meeting_date_time ? new Date(row.meeting_date_time).toLocaleString() : "N/A"}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200 flex items-center">
-                                            {getStatusDot(row.lead_status)}
-                                            {row.lead_status || "N/A"}
-                                        </td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{getStatusBadge(row.lead_status)}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>

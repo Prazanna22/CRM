@@ -5,55 +5,55 @@ export const OutsourceDB = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filter, setFilter] = useState("year");
-    const [start,setStart]= useState(false);
-    
+    const [start, setStart] = useState(false);
+
 
     const startCall = async () => {
         try {
-          const response = await fetch("https://8197-49-204-138-174.ngrok-free.app/food_APP/call-ai-agent/", {
-            method: "GET",
-            headers: {
-              "ngrok-skip-browser-warning": "true"
+            const response = await fetch("https://8197-49-204-138-174.ngrok-free.app/food_APP/call-ai-agent/", {
+                method: "GET",
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                }
+            });
+
+            const result = await response.json();
+            setStart(true);
+
+            if (response.ok) {
+                alert("Call process started successfully.");
+                console.log("Call result:", result);
+            } else {
+                alert("Failed to trigger call process.");
             }
-          });
-      
-          const result = await response.json();
-          setStart(true);
-      
-          if (response.ok) {
-            alert( "Call process started successfully.");
-            console.log("Call result:", result);
-          } else {
-            alert("Failed to trigger call process.");
-          }
         } catch (error) {
-          console.error("Error starting call process:", error);
-          alert("An error occurred while starting the call process.");
+            console.error("Error starting call process:", error);
+            alert("An error occurred while starting the call process.");
         }
-      };
-      const stopCall = async () => {
+    };
+    const stopCall = async () => {
         try {
-          const response = await fetch("https://8197-49-204-138-174.ngrok-free.app/food_APP/stop-call/", {
-            method: "POST",
-            headers: {
-              "ngrok-skip-browser-warning": "true"
+            const response = await fetch("https://8197-49-204-138-174.ngrok-free.app/food_APP/stop-call/", {
+                method: "POST",
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                }
+            });
+
+            const result = await response.json();
+            setStart(false)
+            if (response.ok) {
+                alert("Call process stopped successfully.");
+            } else {
+                alert("Failed to stop the call process.");
             }
-          });
-      
-          const result = await response.json();
-          setStart(false)
-          if (response.ok) {
-            alert( "Call process stopped successfully.");
-          } else {
-            alert("Failed to stop the call process.");
-          }
         } catch (error) {
-          console.error("Error stopping call process:", error);
-          alert("An error occurred while trying to stop the call process.");
+            console.error("Error stopping call process:", error);
+            alert("An error occurred while trying to stop the call process.");
         }
-      };
-      
-      
+    };
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -108,31 +108,30 @@ export const OutsourceDB = () => {
     return (
         <div className="px-4 ">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
-           <div className="flex justify-between">
-          
-           <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-1 px-4 my-2 ">
-                <option value="year" className="  bg-black">This Year</option>
-                <option value="month" className=" bg-black">This Month</option>
-                <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
-            </select>
-            <div className="">
-            <button className="bg-red-600 text-white px-4 py-1 text-md rounded hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
-                Stop Call
-            </button>
-            <button
-  onClick={startCall}
-  disabled={start}
-  className={`px-4 py-1 text-md rounded my-2 ${
-    start
-      ? "bg-gray-400 text-white cursor-not-allowed"
-      : "bg-green-600 text-white hover:bg-green-700"
-  }`}
->
-  {start ? "Calling..." : "Start Call"}
-</button>
+            <div className="flex justify-between">
 
+                <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-1 px-4 my-2 ">
+                    <option value="year" className="  bg-black">This Year</option>
+                    <option value="month" className=" bg-black">This Month</option>
+                    <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
+                </select>
+                <div className="">
+                    <button className="bg-red-600 text-white px-4 py-1 text-md rounded hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
+                        Stop Call
+                    </button>
+                    <button
+                        onClick={startCall}
+                        disabled={start}
+                        className={`px-4 py-1 text-md rounded my-2 ${start
+                                ? "bg-gray-400 text-white cursor-not-allowed"
+                                : "bg-green-600 text-white hover:bg-green-700"
+                            }`}
+                    >
+                        {start ? "Calling..." : "Start Call"}
+                    </button>
+
+                </div>
             </div>
-           </div>
 
             <div className="overflow-x-auto">
                 <div className="max-h-[77vh] overflow-y-auto border border-gray-300">
