@@ -108,13 +108,13 @@ export const B2B = () => {
     const getStatusDot = (status) => {
         switch (status?.toLowerCase()) {
             case "cold":
-                return <span className="inline-block w-3 h-3 rounded-full bg-red-600 mr-2"></span>;
+                return <span className="inline-block w-3 h-3 rounded-full bg-red-700 mr-2"></span>;
             case "warm":
                 return <span className="inline-block w-3 h-3 rounded-full bg-orange-400 mr-2"></span>;
             case "hot":
-                return <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>;
+                return <span className="inline-block w-3 h-3 rounded-full bg-green-600 mr-2"></span>;
             case "not interested":
-                return <span className="inline-block w-3 h-3 rounded-full bg-gray-300 mr-2"></span>;
+                return <span className="inline-block w-3 h-3 rounded-full bg-gray-200 mr-2"></span>;
             default:
                 return null;
         }
