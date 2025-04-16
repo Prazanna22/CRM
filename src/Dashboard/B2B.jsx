@@ -105,13 +105,28 @@ export const B2B = () => {
         }
         return true;
     })
+    const getStatusDot = (status) => {
+        switch (status?.toLowerCase()) {
+            case "cold":
+                return <span className="inline-block w-3 h-3 rounded-full bg-red-600 mr-2"></span>;
+            case "warm":
+                return <span className="inline-block w-3 h-3 rounded-full bg-orange-400 mr-2"></span>;
+            case "hot":
+                return <span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>;
+            case "not interested":
+                return <span className="inline-block w-3 h-3 rounded-full bg-gray-300 mr-2"></span>;
+            default:
+                return null;
+        }
+    };
+
 
 
     return (
         <div className="px-4">
-              <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
+            <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
             <button
-               onClick={() => exportToExcel(filteredData, "B2C_Leads")}
+                onClick={() => exportToExcel(filteredData, "B2C_Leads")}
                 className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 mr-4"
             >
                 Export file
@@ -160,7 +175,10 @@ export const B2B = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.existing_menu_budget || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.prefered_menu_budget || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.meeting_date_time ? new Date(row.meeting_date_time).toLocaleString() : "N/A"}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.lead_status || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200 flex items-center">
+                                            {getStatusDot(row.lead_status)}
+                                            {row.lead_status || "N/A"}
+                                        </td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
