@@ -5,6 +5,7 @@ export const OutsourceDB = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filter, setFilter] = useState("year");
+    const [start,setStart]= useState(false);
     
 
     const startCall = async () => {
@@ -17,9 +18,10 @@ export const OutsourceDB = () => {
           });
       
           const result = await response.json();
+          setStart(true);
       
           if (response.ok) {
-            alert( "Call process triggered successfully.");
+            alert( "Call process started successfully.");
             console.log("Call result:", result);
           } else {
             alert("Failed to trigger call process.");
@@ -39,7 +41,7 @@ export const OutsourceDB = () => {
           });
       
           const result = await response.json();
-      
+          setStart(false)
           if (response.ok) {
             alert( "Call process stopped successfully.");
           } else {
@@ -107,6 +109,7 @@ export const OutsourceDB = () => {
         <div className="px-4 ">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
            <div className="flex justify-between">
+          
            <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-1 px-4 my-2 ">
                 <option value="year" className="  bg-black">This Year</option>
                 <option value="month" className=" bg-black">This Month</option>
@@ -116,9 +119,18 @@ export const OutsourceDB = () => {
             <button className="bg-red-600 text-white px-4 py-1 text-md rounded hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
                 Stop Call
             </button>
-            <button className="bg-green-600 text-white px-4 py-1 text-md rounded hover:bg-green-700 my-2 " onClick={startCall}>
-                Start Call
-            </button>
+            <button
+  onClick={startCall}
+  disabled={start}
+  className={`px-4 py-1 text-md rounded my-2 ${
+    start
+      ? "bg-gray-400 text-white cursor-not-allowed"
+      : "bg-green-600 text-white hover:bg-green-700"
+  }`}
+>
+  {start ? "Calling..." : "Start Call"}
+</button>
+
             </div>
            </div>
 
