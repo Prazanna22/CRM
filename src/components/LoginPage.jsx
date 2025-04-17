@@ -37,9 +37,9 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                     <div className="flex items-center justify-center">
                         {/* form */}
 
-                        <div className="w-1/2 flex flex-col justify-center items-center p-10 ">
+                        <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-10 ">
                             <h1 className="mb-1 text-gray-300 text-center font-extrabold text-3xl " data-aos="fade-right" data-aos-delay="100">Login</h1>
-                            <div className=" p-8 rounded-xl w-80 md:w-96 text-white">
+                            <div className=" rounded-xl  md:w-96 text-white">
 
                                 <form
                                     onSubmit={(e) => {
