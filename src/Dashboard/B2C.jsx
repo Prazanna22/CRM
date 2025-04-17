@@ -25,7 +25,7 @@ export const B2C = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://hogist.com/app/food_APP/get_b2c/", {
+                const response = await fetch("https://hogist.com/food_APP/get_b2c/", {
 
                     method: "GET",
                     headers: {

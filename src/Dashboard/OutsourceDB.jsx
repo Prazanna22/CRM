@@ -10,7 +10,7 @@ export const OutsourceDB = () => {
 
     const startCall = async () => {
         try {
-            const response = await fetch("https://hogist.com/app/food_APP/call-ai-agent/", {
+            const response = await fetch("https://hogist.com/food_APP/call-ai-agent/", {
                 method: "GET",
                 headers: {
                     "ngrok-skip-browser-warning": "true"
@@ -33,7 +33,7 @@ export const OutsourceDB = () => {
     };
     const stopCall = async () => {
         try {
-            const response = await fetch("https://hogist.com/app/food_APP/stop-call/", {
+            const response = await fetch("https://hogist.com/food_APP/stop-call/", {
                 method: "POST",
                 headers: {
                     "ngrok-skip-browser-warning": "true"
@@ -57,7 +57,7 @@ export const OutsourceDB = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://hogist.com/app/food_APP/outsource/", {
+                const response = await fetch("https://hogist.com/food_APP/outsource/", {
 
                     method: "GET",
                     headers: {

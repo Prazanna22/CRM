@@ -52,7 +52,7 @@ export const B2B = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://hogist.com/app/food_APP/get_b2b/", {
+                const response = await fetch("https://hogist.com/food_APP/get_b2b/", {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
