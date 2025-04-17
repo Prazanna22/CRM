@@ -45,7 +45,7 @@ const Dashboard = () => {
     };
     const HandlefetchData = async () => {
         try {
-            const response = await fetch("https://hogist.com/food_APP/process-vapi-responses/", {
+            const response = await fetch("https://hogist.com/app/food_APP/process-vapi-responses/", {
                 method: "GET",
                 headers: {
                     "ngrok-skip-browser-warning": "true"
