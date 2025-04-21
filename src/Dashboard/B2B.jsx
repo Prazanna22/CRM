@@ -32,7 +32,7 @@ export const B2B = () => {
     //         a.remove();
     //         window.URL.revokeObjectURL(url);
     //     } catch (error) {
-    //         console.error("Export error:", error);
+    //         console.error("Export error:", error); 
     //         alert("Failed to download export file.");
     //     }
     // };
@@ -125,7 +125,7 @@ export const B2B = () => {
 
 
     return (
-        <div className="px-4">
+        <div className="px-4 pt-10">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
             <button
                 onClick={() => exportToExcel(filteredData, "B2C_Leads")}

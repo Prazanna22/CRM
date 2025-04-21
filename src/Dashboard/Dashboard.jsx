@@ -11,6 +11,8 @@ import { FaTable, FaTableList } from "react-icons/fa6";
 import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const Dashboard = () => {
     const [activeSection, setActiveSection] = useState("home");
     const [isCollapsed, setIsCollapsed] = useState(true);
@@ -82,7 +84,7 @@ const Dashboard = () => {
         <>
             <div className="flex w-screen overflow-visible justify-start items-start ibm">
                 {/* Laptop Sidebar - remains unchanged */}
-                <div className={`hidden md:flex text-white flex-col justify-between px-2  fixed bg-black z-30 h-screen transition-all duration-300 ease-in-out ${isCollapsed ? 'w-22' : 'w-56'} overflow-hidden`}>
+                <div className={`hidden md:flex text-white flex-col justify-between px-2  fixed z-30 h-screen transition-all duration-300 ease-in-out ${isCollapsed ? 'w-22' : 'w-56'} overflow-hidden`}>
                     <div className="flex flex-col flex-grow gap-6 my-5 ml-4 overflow-visible justify-between bg-gray-800 rounded-2xl ">
                         <div className="flex flex-col flex-grow gap-3">
                             <div className="flex px-2 items-center justify-start gap-2 py-4 cursor-pointer">
@@ -228,8 +230,8 @@ const Dashboard = () => {
                 </div>
 
                 {/* Main Content Area */}
-                <div className={`flex flex-col fixed right-0 top-0 h-screen transition-all duration-300 ease-in-out bg-black overflow-hidden w-full md:w-[calc(100%-${isCollapsed ? '5.5rem' : '14rem'})]`}>
-                    <div className="px-6 mt-0 overflow-auto h-full bg-black text-white">
+                <div className={`flex flex-col h-screen bg-black transition-all duration-300 overflow-hidden ease-in-out w-full ${isCollapsed ? 'md:ml-[4rem]' : 'md:ml-[12rem]'}`}>
+                    <div className=" px-4 sm:px-6 md:px-8 overflow-auto text-white  h-full">
                         {activeSection === "upload" && <UploadFile />}
                         {activeSection === "home" && <Home />}
                         {activeSection === "b2b" && <B2B />}
