@@ -30,7 +30,7 @@ const UploadFile = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("https://hogist.com/food_APP/upload_excel/", {
+      const response = await fetch("https://b314-49-204-115-127.ngrok-free.app/food_APP/upload_excel/", {
         method: "POST",
         body: formData,
         credentials: "include", 
