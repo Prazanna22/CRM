@@ -17,20 +17,23 @@ export const OutsourceDB = () => {
                     "ngrok-skip-browser-warning": "true"
                 }
             });
-            toast.success("Call started successfully!");
+            
             const result = await response.json();
             setStart(true);
 
             if (response.ok) {
-                alert("Call process started successfully.");
+                // alert("Call process started successfully.");
+                toast.success("Call started successfully!");
                 console.log("Call result:", result);
             } else {
-                alert("Failed to trigger call process.");
+                toast.error("Failed to trigger call process.");
+                // alert("Failed to trigger call process.");
             }
         } catch (error) {
             
             console.error("Error starting call process:", error);
-            alert("An error occurred while starting the call process.");
+            toast.error("Error starting call process:");
+            // alert("An error occurred while starting the call process.");
         }
     };
     const stopCall = async () => {
@@ -43,16 +46,18 @@ export const OutsourceDB = () => {
             });
 
             const result = await response.json();
-            toast.success("Call Stopped Successfully")
             setStart(false)
             if (response.ok) {
-                alert("Call process stopped successfully.");
+                //alert("Call process stopped successfully.");
+            toast.success("Call process stopped successfully");
             } else {
-                alert("Failed to stop the call process.");
+                //alert("Failed to stop the call process.");
+                toast.error("Failed to stop the call process.");
             }
         } catch (error) {
             console.error("Error stopping call process:", error);
-            alert("An error occurred while trying to stop the call process.");
+            toast.error("Error stopping call process:");
+            // alert("An error occurred while trying to stop the call process.");
         }
     };
 
@@ -85,7 +90,7 @@ export const OutsourceDB = () => {
 
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-        <p className="text-center p-4 ">Loading...</p>
+           <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-600"></div>
     </div>;
     if (error) return; <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>

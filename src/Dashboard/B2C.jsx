@@ -48,7 +48,7 @@ export const B2C = () => {
     }, []);
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-        <p className="text-center p-4 ">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-600"></div>
     </div>;
     if (error) return; <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
