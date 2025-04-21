@@ -5,6 +5,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import logo2 from '../assets/logo2.png'
 import robot from '../assets/robot.png'
+
+
 export const LoginPage = ({ setIsAuthenticated }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -71,7 +73,8 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                     </div>
                                     {/* <p className="text-right text-sm text-gray-400 cursor-pointer hover:underline">Forgot Password</p> */}
                                     <button
-                                        onClick={handleLogin}
+                                    type="submit"
+                                     
                                         className="w-full mt-4 bg-green-600 text-white p-3 rounded-xl hover:bg-green-700" data-aos="fade-right" data-aos-delay="400"
                                     >
                                         Sign in

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const OutsourceDB = () => {
     const [tableData, setTableData] = useState([]);
@@ -16,7 +17,7 @@ export const OutsourceDB = () => {
                     "ngrok-skip-browser-warning": "true"
                 }
             });
-
+            toast.success("Call started successfully!");
             const result = await response.json();
             setStart(true);
 
@@ -27,6 +28,7 @@ export const OutsourceDB = () => {
                 alert("Failed to trigger call process.");
             }
         } catch (error) {
+            
             console.error("Error starting call process:", error);
             alert("An error occurred while starting the call process.");
         }
@@ -41,6 +43,7 @@ export const OutsourceDB = () => {
             });
 
             const result = await response.json();
+            toast.success("Call Stopped Successfully")
             setStart(false)
             if (response.ok) {
                 alert("Call process stopped successfully.");

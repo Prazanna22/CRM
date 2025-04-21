@@ -64,7 +64,7 @@ const UploadFile = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen px-4">
+    <div className="flex flex-col items-center justify-center my-10 md:my-0 md:h-screen px-4">
       {/* <button onClick={() => setActiveSection("dashboard")} className="mb-4 px-4 py-2 bg-gray-600 text-white rounded">
         Back to Dashboard
       </button> */}
