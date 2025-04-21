@@ -74,7 +74,7 @@ export const B2B = () => {
     }, []);
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-600"></div>
+        <span class="loader"></span>
     </div>;
     if (error) return; <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
@@ -129,11 +129,11 @@ export const B2B = () => {
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
             <button
                 onClick={() => exportToExcel(filteredData, "B2C_Leads")}
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 my-2 mr-4"
+                className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700 my-2 mr-4"
             >
                 Export file
             </button>
-            <select value={filter} onChange={(e) => setFilter(e.target.value)} className=" rounded border border-white py-2 px-4 my-2 ">
+            <select value={filter} onChange={(e) => setFilter(e.target.value)} className="cursor-pointer rounded border border-white py-2 px-4 my-2 ">
                 <option value="year" className="  bg-black">This Year</option>
                 <option value="month" className=" bg-black">This Month</option>
                 <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>

@@ -14,10 +14,20 @@ function App() {
 
     return (
         <div className="bg-black">
-            <ToastContainer position="top-right" autoClose={3000} />
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <Router>
                 <Routes>
-                
+
                     <Route
                         path="/login"
                         element={

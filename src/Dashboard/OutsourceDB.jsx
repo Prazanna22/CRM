@@ -90,7 +90,7 @@ export const OutsourceDB = () => {
 
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-           <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-600"></div>
+           <span class="loader"></span>
     </div>;
     if (error) return; <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
@@ -118,19 +118,19 @@ export const OutsourceDB = () => {
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
             <div className="flex justify-between">
 
-                <select value={filter} onChange={(e) => setFilter(e.target.value)} className="  border rounded border-white py-1 px-4 my-2 ">
-                    <option value="year" className="  bg-black">This Year</option>
-                    <option value="month" className=" bg-black">This Month</option>
-                    <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
+                <select value={filter} onChange={(e) => setFilter(e.target.value)} className="cursor-pointer  border rounded border-white py-1 px-4 my-2 ">
+                    <option value="year" className=" cursor-pointer bg-black">This Year</option>
+                    <option value="month" className="cursor-pointer bg-black">This Month</option>
+                    <option value="today" className=" cursor-pointer appearance-none focus:outline-none  bg-black">Today</option>
                 </select>
                 <div className="">
-                    <button className="bg-red-600 text-white px-4 py-1 text-md rounded hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
+                    <button className="bg-red-600 text-white px-4 py-1 text-md rounded cursor-pointer hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
                         Stop Call
                     </button>
                     <button
                         onClick={startCall}
                         disabled={start}
-                        className={`px-4 py-1 text-md rounded my-2 ${start
+                        className={`px-4 py-1 text-md rounded my-2 cursor-pointer ${start
                                 ? "bg-gray-400 text-white cursor-not-allowed"
                                 : "bg-green-600 text-white hover:bg-green-700"
                             }`}

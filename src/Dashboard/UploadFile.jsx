@@ -71,7 +71,7 @@ const UploadFile = () => {
            <h1 className="font-bold text-4xl text-green-600 text-center  my-10">Upload file</h1>
       <div
         {...getRootProps()}
-        className="w-96 h-48 border-2 border-dashed border-gray-500 flex items-center justify-center cursor-pointer"
+        className="w-60 md:w-80 lg:w-96 h-48 border-2 border-dashed border-gray-500 flex items-center justify-center cursor-pointer"
       >
         
         <input {...getInputProps()} />
