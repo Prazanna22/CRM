@@ -142,7 +142,7 @@ export const OutsourceDB = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <div className="max-h-[77vh] overflow-y-auto border border-gray-300">
+                <div className="max-h-[74vh] overflow-y-auto border border-gray-300">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
                         <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>

@@ -139,7 +139,7 @@ export const B2B = () => {
                 <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
             </select>
             <div className="overflow-x-auto">
-                <div className="max-h-[77vh]  border border-gray-300 overflow-y-auto">
+                <div className="max-h-[74vh]  border border-gray-300 overflow-y-auto">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
                         <thead className="bg-gray-200 sticky top-0  z-10">
                             <tr>
