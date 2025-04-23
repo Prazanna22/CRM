@@ -124,7 +124,7 @@ export const B2C = () => {
                                     "Service Choice", "Choice of Menu", "Existing Budget", "Preferred Budget",
                                     "Meeting Date", "Lead Status", "Status", "Remark", "Created At", "Lead Score", "Call ID"
                                 ].map((header, index) => (
-                                    <th key={index} className="px-3 py-5 text-left text-xs font-medium uppercase text-green-600 border-b-2 border-gray-300 bg-black tracking-wider whitespace-nowrap">
+                                    <th key={index} className="px-3 py-3 text-left text-xs font-medium  text-gray-900 uppercase tracking-wider whitespace-nowrap">
                                         {header}
                                         {header === "Lead Score" && (
                                             <button onClick={handleSort} className="ml-1 px-1 ">

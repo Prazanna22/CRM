@@ -144,14 +144,14 @@ export const OutsourceDB = () => {
             <div className="overflow-x-auto">
                 <div className="max-h-[77vh] overflow-y-auto border border-gray-300">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
-                        <thead className="bg-gray-300 sticky top-0 z-10">
+                        <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>
                                 {[
                                     "Name", "Organization", "Designation", "Address",
                                     "Contact Number", "Email", "Status", "Source",
                                     "Created At"
                                 ].map((header, index) => (
-                                    <th key={index} className="px-3 py-5 text-left text-xs font-medium text-green-600 border-b-2 border-gray-300 uppercase  bg-black ">
+                                    <th key={index} className="px-3 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider whitespace-nowrap">
                                         {header}
                                     </th>
                                 ))}
@@ -160,7 +160,7 @@ export const OutsourceDB = () => {
                         <tbody>
                             {Array.isArray(filteredData) && filteredData.length > 0 ? (
                                 filteredData.map((row, index) => (
-                                    <tr key={index} className="hover:bg-gray-900 ">
+                                    <tr key={index} className="hover:bg-gray-900">
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.name || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.org_name || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.designation || "N/A"}</td>

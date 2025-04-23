@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import UploadFile from "./UploadFile";
-import { Navbar } from "../components/Navbar";
-import { FaUpload, FaChevronLeft, FaChevronRight, FaHome, FaDatabase, FaGetPocket } from "react-icons/fa";
+import { FaUpload, FaChevronLeft, FaChevronRight, FaHome, FaDatabase } from "react-icons/fa";
 import { Home } from "./Home";
 import { B2B } from "./B2B";
 import { B2C } from "./B2C";

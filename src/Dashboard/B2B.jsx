@@ -144,7 +144,7 @@ export const B2B = () => {
                         <thead className="bg-gray-200 sticky top-0  z-10">
                             <tr>
                                 {["Name", "Contact Number", "Alternate Number", "Email", "Event Type", "Company Name", "Designation", "Delivery Location", "Count", "Required Meal Service", "Dietary Options", "Service Type", "Service Choice", "Choice of Menu", "Existing Budget", "Preferred Budget", "Meeting Date", "Lead Status", "Status", "Remark", "Created At", "Lead Score", "Call ID"].map((header, index) => (
-                                    <th key={index} className="px-3 py-5 text-left text-xs font-medium  text-green-600 border-b-2 border-gray-300 bg-black uppercase tracking-wider whitespace-nowrap">
+                                    <th key={index} className="px-3 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider whitespace-nowrap">
                                         {header}
                                         {header === "Lead Score" && (
                                             <button onClick={handleSort} className="ml-1  px-1 ">
