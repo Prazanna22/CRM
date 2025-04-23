@@ -90,7 +90,7 @@ export const OutsourceDB = () => {
 
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-           <span class="loader"></span>
+           <span className="loader"></span>
     </div>;
     if (error) return; <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>

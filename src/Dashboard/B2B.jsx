@@ -74,9 +74,9 @@ export const B2B = () => {
     }, []);
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-        <span class="loader"></span>
-    </div>;
-    if (error) return; <div className="flex justify-center items-center h-screen w-full">
+        <span className="loader"></span>
+    </div>
+    if (error) return <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
     </div>
 
@@ -120,7 +120,7 @@ export const B2B = () => {
                 return <span className={`${baseClass} bg-gray-600`}>N/A</span>;
         }
     };
-    
+
 
 
 
