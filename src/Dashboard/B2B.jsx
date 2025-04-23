@@ -11,7 +11,7 @@ export const B2B = () => {
 
     // const handleExport = async () => {
     //     try {
-    //         const response = await fetch("https://0f57-49-204-135-207.ngrok-free.app/food_APP/export_b2b/", {
+    //         const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/export_b2b/", {
     //             method: "GET",
     //             headers: {
     //                 "ngrok-skip-browser-warning": "true",
@@ -52,7 +52,7 @@ export const B2B = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://0f57-49-204-135-207.ngrok-free.app/food_APP/get_b2b/", {
+                const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/get_b2b/", {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',

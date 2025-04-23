@@ -25,7 +25,7 @@ export const B2C = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://0f57-49-204-135-207.ngrok-free.app/food_APP/get_b2c/", {
+                const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/get_b2c/", {
 
                     method: "GET",
                     headers: {
