@@ -114,7 +114,7 @@ export const OutsourceDB = () => {
 
 
     return (
-        <div className="px-4 pt-10 ">
+        <div className="px-4 pt-10 ibm">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
             <div className="flex justify-between">
 
