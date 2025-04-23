@@ -183,51 +183,53 @@ const Dashboard = () => {
                 )}
 
                 {/* Mobile Drawer Menu */}
-                <div className="md:hidden fixed inset-0 z-40">
-                    {/* Overlay */}
-                    <div
-                        className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${mobileDrawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                        onClick={() => setMobileDrawerOpen(false)}
-                    ></div>
-
-                    {/* Drawer */}
-                    <div
-                        ref={drawerRef}
-                        className={`absolute top-0 left-0 h-full w-2/3 bg-gray-900 text-white p-6 flex flex-col gap-4 transform transition-transform duration-300 ease-in-out ${mobileDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
-                    >
-                        <button
-                            className="text-xl mb-4 self-start"
+                {mobileDrawerOpen && (
+                    <div className="md:hidden fixed inset-0 z-40">
+                        {/* Overlay */}
+                        <div
+                            className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${mobileDrawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                             onClick={() => setMobileDrawerOpen(false)}
+                        ></div>
+
+                        {/* Drawer */}
+                        <div
+                            ref={drawerRef}
+                            className={`absolute top-0 left-0 h-full w-2/3 bg-gray-900 text-white p-6 flex flex-col gap-4 transform transition-transform duration-300 ease-in-out ${mobileDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
                         >
-                            ✕
-                        </button>
-                        <div className="flex items-center gap-2 mb-6">
-                            <img src={logo} alt="Logo" className="w-10" />
-                            <span className="text-xl font-bold">Hogist</span>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            {sidebarItems.map(({ id, label, icon }) => (
-                                <button
-                                    key={id}
-                                    onClick={() => {
-                                        setActiveSection(id);
-                                        setMobileDrawerOpen(false);
-                                    }}
-                                    className={`flex items-center gap-4 py-2 px-4 rounded-md ${activeSection === id ? 'bg-green-500 text-white' : 'text-white hover:bg-gray-800'}`}
-                                >
-                                    {icon}
-                                    <span>{label}</span>
-                                </button>
-                            ))}
-                        </div>
-                        <div className="mt-auto">
-                            {/* <button onClick={HandlefetchData} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-white hover:bg-gray-800"
-                            > <FaGetPocket size={20} /> <span>Fetch</span></button> */}
-                            <button onClick={handleLogout} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-red-400 hover:bg-gray-800"> <FaUser size={20} /> <span>Logout</span>
+                            <button
+                                className="text-xl mb-4 self-start"
+                                onClick={() => setMobileDrawerOpen(false)}
+                            >
+                                ✕
                             </button>
+                            <div className="flex items-center gap-2 mb-6">
+                                <img src={logo} alt="Logo" className="w-10" />
+                                <span className="text-xl font-bold">Hogist</span>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                {sidebarItems.map(({ id, label, icon }) => (
+                                    <button
+                                        key={id}
+                                        onClick={() => {
+                                            setActiveSection(id);
+                                            setMobileDrawerOpen(false);
+                                        }}
+                                        className={`flex items-center gap-4 py-2 px-4 rounded-md ${activeSection === id ? 'bg-green-500 text-white' : 'text-white hover:bg-gray-800'}`}
+                                    >
+                                        {icon}
+                                        <span>{label}</span>
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="mt-auto">
+                                {/* <button onClick={HandlefetchData} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-white hover:bg-gray-800"
+                         > <FaGetPocket size={20} /> <span>Fetch</span></button> */}
+                                <button onClick={handleLogout} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-red-400 hover:bg-gray-800"> <FaUser size={20} /> <span>Logout</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* Main Content Area */}
                 <div className={`flex flex-col h-screen bg-black transition-all duration-300 overflow-hidden ease-in-out w-full ${isCollapsed ? 'md:ml-[4rem]' : 'md:ml-[12rem]'}`}>
