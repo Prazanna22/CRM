@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import UploadFile from "./UploadFile";
-import { FaUpload, FaChevronLeft, FaChevronRight, FaHome, FaDatabase } from "react-icons/fa";
+import { FaUpload, FaChevronLeft, FaChevronRight, FaHome, FaDatabase, FaGetPocket } from "react-icons/fa";
 import { Home } from "./Home";
 import { B2B } from "./B2B";
 import { B2C } from "./B2C";
@@ -51,25 +51,25 @@ const Dashboard = () => {
         window.location.reload();
     };
 
-    // const HandlefetchData = async () => {
-    //     try {
-    //         const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/process-vapi-responses/", {
-    //             method: "GET",
-    //             headers: {
-    //                 "ngrok-skip-browser-warning": "true"
-    //             }
-    //         });
-    //         const result = await response.json();
-    //         if (response.ok) {
-    //             alert("Data fetched successfully");
-    //             console.log("Call result:", result);
-    //         } else {
-    //             alert("Failed to fetch");
-    //         }
-    //     } catch (error) {
-    //         console.error("Error while fetch:", error);
-    //     }
-    // };
+    const HandlefetchData = async () => {
+        try {
+            const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/fetch_bot_leads/", {
+                method: "GET",
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                }
+            });
+            const result = await response.json();
+            if (response.ok) {
+                alert("Data fetched successfully");
+                console.log("Call result:", result);
+            } else {
+                alert("Failed to fetch");
+            }
+        } catch (error) {
+            console.error("Error while fetch:", error);
+        }
+    };
 
     const sidebarItems = [
         { id: "home", label: "Home", icon: <FaHome size={20} /> },
@@ -122,7 +122,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="flex flex-col ">
-                            {/* <button className={`py-3 pl-4 px-1 flex items-center gap-4 my-2 cursor-pointer  justify-left }`} onClick={HandlefetchData}>
+                            <button className={`py-3 pl-4 px-1 flex items-center gap-4 my-2 cursor-pointer  justify-left }`} onClick={HandlefetchData}>
                                 <span className="transition-all duration-300 ease-in-out transform" >
                                     <FaGetPocket size={24} />
                                 </span>
@@ -131,7 +131,7 @@ const Dashboard = () => {
                                         } overflow-hidden whitespace-nowrap`}>
                                     Fetch
                                 </span>
-                            </button> */}
+                            </button>
                             <div className="relative z-50 overflow-visible" ref={profileRef}>
                                 <button
                                     className="py-2 pl-4 flex items-center gap-4 my-2 justify-left cursor-pointer"
@@ -221,8 +221,8 @@ const Dashboard = () => {
                                 ))}
                             </div>
                             <div className="mt-auto">
-                                {/* <button onClick={HandlefetchData} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-white hover:bg-gray-800"
-                         > <FaGetPocket size={20} /> <span>Fetch</span></button> */}
+                                <button onClick={HandlefetchData} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-white hover:bg-gray-800"
+                         > <FaGetPocket size={20} /> <span>Fetch</span></button>
                                 <button onClick={handleLogout} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-red-400 hover:bg-gray-800"> <FaUser size={20} /> <span>Logout</span>
                                 </button>
                             </div>
