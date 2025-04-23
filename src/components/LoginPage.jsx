@@ -72,8 +72,8 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                     </div>
                                     {/* <p className="text-right text-sm text-gray-400 cursor-pointer hover:underline">Forgot Password</p> */}
                                     <button
-                                    type="submit"
-                                     
+                                        type="submit"
+
                                         className="w-full mt-4 bg-green-600 text-white p-3 rounded-xl hover:bg-green-700" data-aos="fade-right" data-aos-delay="400"
                                     >
                                         Sign in
@@ -88,7 +88,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                             {/* Inverted Corner (Top Right) */}
                             <div className="absolute top-10 right-10 xl:right-28 w-20 h-20 bg-black rounded-bl-3xl z-0  border-2 border-black tag" ></div>
                             <div className="absolute top-16 left-10 lg:left-28  mx-8" >
-                                <img src={logo2} alt="img" className="w-48" />
+                                <img src={logo2} alt="img" className="w-48" loading="lazy" />
                             </div>
 
                             <div className="bg-green-700 text-white flex flex-col justify-center px-8 pt-16 pb-10 md:mx-10 xl:mx-28 mt-10 rounded-xl overflow-hidden border-2 border-green-700">
@@ -97,7 +97,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                 <div className="mt-10 py-2 bg-green-600 rounded-lg relative z-10 px-5 ">
                                     <div className="flex my-4 items-center justify-center">
                                         <h2 className="text-3xl font-bold z-10   text-center">Welcome Back to <span className=" font-bold text-6xl leading-20 poppins  ">Sellient</span></h2>
-                                        <img src={robot} alt="" className="w-32 h-32   " />
+                                        <img src={robot} alt="" className="w-32 h-32 " loading="lazy" />
                                         {/* <div className=" flex items-center justify-center">
                                       
                                     </div> */}
