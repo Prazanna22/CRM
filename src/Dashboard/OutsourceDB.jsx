@@ -116,15 +116,15 @@ export const OutsourceDB = () => {
     return (
         <div className="px-4 pt-10 ibm">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-10">
 
                 <select value={filter} onChange={(e) => setFilter(e.target.value)} className="cursor-pointer  border rounded border-white py-1 px-4 my-2 ">
                     <option value="year" className=" cursor-pointer bg-black">This Year</option>
                     <option value="month" className="cursor-pointer bg-black">This Month</option>
                     <option value="today" className=" cursor-pointer appearance-none focus:outline-none  bg-black">Today</option>
                 </select>
-                <div className="">
-                    <button className="bg-red-600 text-white px-4 py-1 text-md rounded cursor-pointer hover:bg-red-700 my-2 mr-4" onClick={stopCall}>
+                <div className="flex flex-col md:flex-row md:gap-5 ">
+                    <button className="bg-red-600 text-white px-4 py-1 text-md rounded cursor-pointer hover:bg-red-700 my-2 " onClick={stopCall}>
                         Stop Call
                     </button>
                     <button
