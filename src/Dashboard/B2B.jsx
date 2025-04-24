@@ -157,7 +157,7 @@ export const B2B = () => {
     ];
 
     return (
-        <div className="px-4 pt-10 ibm">
+        <div className="px-4 pt-5 ibm">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
             <div className="flex flex-wrap items-center gap-4 mb-4">
                 <button
