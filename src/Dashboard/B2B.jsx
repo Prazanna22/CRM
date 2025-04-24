@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+
 export const B2B = () => {
     const [tableData, setTableData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [sortOrder, setSortOrder] = useState("asc");
     const [filter, setFilter] = useState("year");
+    const [statusFilter, setStatusFilter] = useState("all");
 
     // const handleExport = async () => {
     //     try {
-    //         const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/export_b2b/", {
+    //         const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/export_b2b/", {
     //             method: "GET",
     //             headers: {
     //                 "ngrok-skip-browser-warning": "true",
@@ -37,8 +39,6 @@ export const B2B = () => {
     //     }
     // };
     const exportToExcel = (data, fileName = "ExportedData") => {
-
-
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
@@ -48,11 +48,10 @@ export const B2B = () => {
         saveAs(dataBlob, `${fileName}.xlsx`);
     };
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://ab32-49-204-138-186.ngrok-free.app/food_APP/get_b2b/", {
+                const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/get_b2b/", {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -91,20 +90,30 @@ export const B2B = () => {
     };
 
     const filteredData = tableData.filter((row) => {
+        // Date filtering
         const createdData = new Date(row.created_at);
         const now = new Date();
-
+        
+        let dateMatch = true;
         if (filter === "today") {
-            return createdData.toDateString() === now.toDateString();
+            dateMatch = createdData.toDateString() === now.toDateString();
         }
         else if (filter === "month") {
-            return createdData.getMonth() === now.getMonth() && createdData.getFullYear() === now.getFullYear()
+            dateMatch = createdData.getMonth() === now.getMonth() && createdData.getFullYear() === now.getFullYear();
         }
         else if (filter === "year") {
-            return createdData.getFullYear() === now.getFullYear()
+            dateMatch = createdData.getFullYear() === now.getFullYear();
         }
-        return true;
-    })
+        
+        // Status filtering
+        let statusMatch = true;
+        if (statusFilter !== "all") {
+            statusMatch = row.lead_status?.toLowerCase() === statusFilter.toLowerCase();
+        }
+        
+        return dateMatch && statusMatch;
+    });
+
     const getStatusBadge = (status) => {
         let baseClass = "text-white px-4 py-1 rounded-full text-xs font-semibold capitalize";
         switch (status?.toLowerCase()) {
@@ -121,37 +130,83 @@ export const B2B = () => {
         }
     };
 
-
-
+    const headers = [
+        "Name", 
+        "Contact Number", 
+        "Alternate Number", 
+        "Email", 
+        "Event Type", 
+        "Company Name", 
+        "Designation", 
+        "Delivery Location", 
+        "Count", 
+        "Required Meal Service", 
+        "Dietary Options", 
+        "Service Type", 
+        "Service Choice", 
+        "Choice of Menu", 
+        "Existing Budget", 
+        "Preferred Budget", 
+        "Meeting Date", 
+        "Lead Status", 
+        "Status", 
+        "Remark", 
+        "Created At", 
+        "Lead Score", 
+        "Call ID"
+    ];
 
     return (
         <div className="px-4 pt-10 ibm">
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
-            <button
-                onClick={() => exportToExcel(filteredData, "B2C_Leads")}
-                className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700 my-2 mr-4"
-            >
-                Export file
-            </button>
-            <select value={filter} onChange={(e) => setFilter(e.target.value)} className="cursor-pointer rounded border border-white py-2 px-4 my-2 ">
-                <option value="year" className="  bg-black">This Year</option>
-                <option value="month" className=" bg-black">This Month</option>
-                <option value="today" className="appearance-none focus:outline-none  bg-black">Today</option>
-            </select>
+            <div className="flex flex-wrap items-center gap-4 mb-4">
+                <button
+                    onClick={() => exportToExcel(filteredData, "B2C_Leads")}
+                    className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700"
+                >
+                    Export file
+                </button>
+                
+                <select 
+                    value={filter} 
+                    onChange={(e) => setFilter(e.target.value)} 
+                    className="cursor-pointer rounded border border-white py-2 px-4"
+                >
+                    <option value="year" className="bg-black">This Year</option>
+                    <option value="month" className="bg-black">This Month</option>
+                    <option value="today" className="bg-black">Today</option>
+                </select>
+            </div>
+            
             <div className="overflow-x-auto">
-                <div className="max-h-[74vh]  border border-gray-300 overflow-y-auto">
+                <div className="max-h-[74vh] border border-gray-300 overflow-y-auto">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
-                        <thead className="bg-gray-200 sticky top-0  z-10">
+                        <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>
-                                {["Name", "Contact Number", "Alternate Number", "Email", "Event Type", "Company Name", "Designation", "Delivery Location", "Count", "Required Meal Service", "Dietary Options", "Service Type", "Service Choice", "Choice of Menu", "Existing Budget", "Preferred Budget", "Meeting Date", "Lead Status", "Status", "Remark", "Created At", "Lead Score", "Call ID"].map((header, index) => (
+                                {headers.map((header, index) => (
                                     <th key={index} className="px-3 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider whitespace-nowrap">
-                                        {header}
-                                        {header === "Lead Score" && (
-                                            <button onClick={handleSort} className="ml-1  px-1 ">
-                                                {sortOrder === "asc" ? <FaArrowDown /> : <FaArrowUp />}
-                                            </button>
-
-                                        )}
+                                        <div className="flex items-center">
+                                            {header}
+                                            {header === "Lead Score" && (
+                                                <button onClick={handleSort} className="ml-1 px-1">
+                                                    {sortOrder === "asc" ? <FaArrowDown /> : <FaArrowUp />}
+                                                </button>
+                                            )}
+                                            {header === "Lead Status" && (
+                                                <select 
+                                                    value={statusFilter} 
+                                                    onChange={(e) => setStatusFilter(e.target.value)}
+                                                    className="ml-2 text-xs  rounded p-1 bg-gray-400 text-gray-900 outline-none"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <option value="all">All</option>
+                                                    <option value="hot">Hot</option>
+                                                    <option value="warm">Warm</option>
+                                                    <option value="cold">Cold</option>
+                                                    <option value="not interested">Not Interested</option>
+                                                </select>
+                                            )}
+                                        </div>
                                     </th>
                                 ))}
                             </tr>

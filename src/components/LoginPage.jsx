@@ -46,12 +46,14 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                     onSubmit={(e) => {
                                         e.preventDefault();
                                         handleLogin();
+                                        
                                     }}
+                                    id="login"
                                     className="p-8 rounded-xl w-80 md:w-96 text-white"
                                 >
                                     {error && <p className="text-red-500 mb-3">{error}</p>}
                                     <div className="flex flex-col gap-3" data-aos="fade-right" data-aos-delay="200">
-                                        <label htmlFor="email" className="">User Id</label>
+                                        <label htmlFor="userId" id="userId">User Id</label>
                                         <input
                                             type="text"
                                             placeholder="Enter the User Id"
@@ -61,7 +63,7 @@ export const LoginPage = ({ setIsAuthenticated }) => {
                                         />
                                     </div>
                                     <div className="flex flex-col gap-3" data-aos="fade-right" data-aos-delay="300">
-                                        <label htmlFor="password">Password</label>
+                                        <label htmlFor="password" id="password">Password</label>
                                         <input
                                             type="password"
                                             placeholder="Enter the Password"
