@@ -53,7 +53,7 @@ const Dashboard = () => {
 
     const HandlefetchData = async () => {
         try {
-            const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/fetch_bot_leads/", {
+            const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/fetch-bot-leads/", {
                 method: "GET",
                 headers: {
                     "ngrok-skip-browser-warning": "true"
