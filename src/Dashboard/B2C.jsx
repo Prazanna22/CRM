@@ -246,7 +246,7 @@ export const B2C = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={21} className="text-center p-4 text-sm text-gray-500">
+                                    <td colSpan={21} className="text-center p-4 text-sm">
                                         No data available
                                     </td>
                                 </tr>

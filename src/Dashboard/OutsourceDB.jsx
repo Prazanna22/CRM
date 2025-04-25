@@ -24,7 +24,7 @@ export const OutsourceDB = () => {
             if (response.ok) {
                 // alert("Call process started successfully.");
                 toast.success("Call started successfully!");
-                console.log("Call result:", result);
+                console.log("Call result:", response);
             } else {
                 toast.error("Failed to trigger call process.");
                 // alert("Failed to trigger call process.");

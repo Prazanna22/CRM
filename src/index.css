@@ -3,7 +3,21 @@
 .ibm{
   font-family: "IBM Plex Sans", sans-serif;
 }
+::-webkit-scrollbar {
+  width: 8px;           
+  height: 8px;              
+}
 
+::-webkit-scrollbar-track {
+  background: transparent;      
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9a9a9a;      
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
 .tag::after,
 .tag::before {
   width: 1.125rem;
@@ -78,19 +92,4 @@
 @keyframes round {
   0% { transform: rotate(0deg) }
   100% { transform: rotate(360deg) }
-}
-::-webkit-scrollbar {
-  width: 8px;           
-  height: 8px;              
-}
-
-::-webkit-scrollbar-track {
-  background: #000000;      
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #9a9a9a;      
-  border-radius: 10px;
-  border: 2px solid #000000;
 }

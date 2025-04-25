@@ -37,7 +37,7 @@ const UploadFile = () => {
         credentials: "include", 
         headers: {
           "X-CSRFToken": getCookie("csrftoken"),
-           "ngrok-skip-browser-warning": "true"
+          //  "ngrok-skip-browser-warning": "true"
           }
       })
 
