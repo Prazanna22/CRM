@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import { FaArrowDown, FaArrowUp, FaFilter } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
@@ -10,10 +10,12 @@ export const B2B = () => {
     const [sortOrder, setSortOrder] = useState("asc");
     const [filter, setFilter] = useState("year");
     const [statusFilter, setStatusFilter] = useState("all");
+    const [selectedStatuses, setSelectedStatuses] = useState([]);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     // const handleExport = async () => {
     //     try {
-    //         const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/export_b2b/", {
+    //         const response = await fetch("https://hogist.com/food-api/export_b2b/", {
     //             method: "GET",
     //             headers: {
     //                 "ngrok-skip-browser-warning": "true",
@@ -38,6 +40,14 @@ export const B2B = () => {
     //         alert("Failed to download export file.");
     //     }
     // };
+
+    useEffect(() => {
+        const handleClickOutside = () => setDropdownOpen(false);
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+
+
     const exportToExcel = (data, fileName = "ExportedData") => {
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
@@ -51,7 +61,7 @@ export const B2B = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/get_b2b/", {
+                const response = await fetch("https://hogist.com/food-api/get_b2b/", {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json',
@@ -93,7 +103,7 @@ export const B2B = () => {
         // Date filtering
         const createdData = new Date(row.created_at);
         const now = new Date();
-        
+
         let dateMatch = true;
         if (filter === "today") {
             dateMatch = createdData.toDateString() === now.toDateString();
@@ -104,13 +114,13 @@ export const B2B = () => {
         else if (filter === "year") {
             dateMatch = createdData.getFullYear() === now.getFullYear();
         }
-        
+
         // Status filtering
         let statusMatch = true;
-        if (statusFilter !== "all") {
-            statusMatch = row.lead_status?.toLowerCase() === statusFilter.toLowerCase();
+        if (selectedStatuses.length > 0) {
+            statusMatch = selectedStatuses.includes(row.lead_status?.toLowerCase());
         }
-        
+
         return dateMatch && statusMatch;
     });
 
@@ -131,28 +141,28 @@ export const B2B = () => {
     };
 
     const headers = [
-        "Name", 
-        "Contact Number", 
-        "Alternate Number", 
-        "Email", 
-        "Event Type", 
-        "Company Name", 
-        "Designation", 
-        "Delivery Location", 
-        "Count", 
-        "Required Meal Service", 
-        "Dietary Options", 
-        "Service Type", 
-        "Service Choice", 
-        "Choice of Menu", 
-        "Existing Budget", 
-        "Preferred Budget", 
-        "Meeting Date", 
-        "Lead Status", 
-        "Status", 
-        "Remark", 
-        "Created At", 
-        "Lead Score", 
+        "Name",
+        "Contact Number",
+        "Alternate Number",
+        "Email",
+        "Event Type",
+        "Company Name",
+        "Designation",
+        "Delivery Location",
+        "Count",
+        "Required Meal Service",
+        "Dietary Options",
+        "Service Type",
+        "Service Choice",
+        "Choice of Menu",
+        "Existing Budget",
+        "Preferred Budget",
+        "Meeting Date",
+        "Lead Status",
+        "Status",
+        "Remark",
+        "Created At",
+        "Lead Score",
         "Call ID"
     ];
 
@@ -166,10 +176,10 @@ export const B2B = () => {
                 >
                     Export file
                 </button>
-                
-                <select 
-                    value={filter} 
-                    onChange={(e) => setFilter(e.target.value)} 
+
+                <select
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
                     className="cursor-pointer rounded border border-white py-2 px-4"
                 >
                     <option value="year" className="bg-black">This Year</option>
@@ -177,7 +187,7 @@ export const B2B = () => {
                     <option value="today" className="bg-black">Today</option>
                 </select>
             </div>
-            
+
             <div className="overflow-x-auto">
                 <div className="max-h-[74vh] border border-gray-300 overflow-y-auto">
                     <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
@@ -193,18 +203,45 @@ export const B2B = () => {
                                                 </button>
                                             )}
                                             {header === "Lead Status" && (
-                                                <select 
-                                                    value={statusFilter} 
-                                                    onChange={(e) => setStatusFilter(e.target.value)}
-                                                    className="ml-2 text-xs  rounded p-1 bg-gray-400 text-gray-900 outline-none"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    <option value="all">All</option>
-                                                    <option value="hot">Hot</option>
-                                                    <option value="warm">Warm</option>
-                                                    <option value="cold">Cold</option>
-                                                    <option value="not interested">Not Interested</option>
-                                                </select>
+                                                <div className="relative ml-2" onClick={(e) => e.stopPropagation()}>
+                                                    <button
+                                                        className=""
+                                                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                                                    >
+                                                        <FaFilter />
+                                                    </button>
+                                                    {dropdownOpen && (
+                                                        <div className="absolute z-20 mt-2 w-48 bg-white border border-gray-300 rounded shadow p-2">
+                                                            {["hot", "warm", "cold", "not interested"].map((status) => (
+                                                                <label key={status} className="block text-sm capitalize">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        value={status}
+                                                                        className="mr-2"
+                                                                        checked={selectedStatuses.includes(status)}
+                                                                        onChange={(e) => {
+                                                                            const checked = e.target.checked;
+                                                                            setSelectedStatuses((prev) =>
+                                                                                checked
+                                                                                    ? [...prev, status]
+                                                                                    : prev.filter((s) => s !== status)
+                                                                            );
+                                                                        }}
+                                                                    />
+                                                                    {status}
+                                                                </label>
+                                                            ))}
+                                                            <div className="mt-2 text-right">
+                                                                <button
+                                                                    className="text-xs text-blue-600 hover:underline"
+                                                                    onClick={() => setSelectedStatuses([])}
+                                                                >
+                                                                    Clear All
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
                                             )}
                                         </div>
                                     </th>

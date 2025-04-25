@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { toast } from "react-toastify";
 
 const UploadFile = () => {
   const [file, setFile] = useState(null);
@@ -30,7 +31,7 @@ const UploadFile = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("https://b336-2401-4900-88e8-81ef-19a6-6e27-cb76-aa5d.ngrok-free.app/food_APP/upload_excel/", {
+      const response = await fetch("https://hogist.com/food-api/upload_excel/", {
         method: "POST",
         body: formData,
         credentials: "include", 
@@ -42,10 +43,13 @@ const UploadFile = () => {
 
       const text = await response.text();
       // console.error("Upload failed. Raw response:", text);
-
-      alert("✅ File uploaded successfully!");
+      if(response.ok){
+        toast.success("file Uploaded Successfully")
+      }
+      // alert("✅ File uploaded successfully!");
     } catch (error) {
       console.error("Upload error:", error);
+      toast.error("Error while Uploading file")
       // alert("❌ Failed to upload file.");
     }
     // Mock upload process
