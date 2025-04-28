@@ -9,7 +9,6 @@ export const B2B = () => {
     const [error, setError] = useState(null);
     const [sortOrder, setSortOrder] = useState("asc");
     const [filter, setFilter] = useState("year");
-    const [statusFilter, setStatusFilter] = useState("all");
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -273,15 +272,15 @@ export const B2B = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">
+                                        {/* <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">
                                             <span className={`px-3 py-1 rounded-full capitalize text-white
                                                         ${row.lead_status?.toLowerCase() === 'hot' ? 'bg-green-600' :
                                                         row.lead_status?.toLowerCase() === 'warm' ? 'bg-orange-400' :
                                                         row.lead_status?.toLowerCase() === 'cold' ? 'bg-red-600' :
                                                             'bg-gray-400'}`}>{row.lead_score || "N/A"}
                                             </span>
-                                        </td>
-
+                                        </td> */}
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.lead_score}</td>
 
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.call_id}</td>
                                     </tr>
