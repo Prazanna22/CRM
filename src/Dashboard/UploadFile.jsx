@@ -37,24 +37,24 @@ const UploadFile = () => {
         credentials: "include", 
         headers: {
           "X-CSRFToken": getCookie("csrftoken"),
-          //  "ngrok-skip-browser-warning": "true"
           }
       })
 
       const text = await response.text();
-      // console.error("Upload failed. Raw response:", text);
+      console.error("Upload failed. Raw response:", text);
       if(response.ok){
-        toast.success("file Uploaded Successfully")
+        toast.success("file Uploaded Successfully");
+        setFile(null); 
       }
-      // alert("✅ File uploaded successfully!");
+ 
     } catch (error) {
       console.error("Upload error:", error);
       toast.error("Error while Uploading file")
-      // alert("❌ Failed to upload file.");
+
     }
-    // Mock upload process
+   
     console.log("Uploading file:", file);
-    // alert("File uploaded successfully!");
+    
   };
 
   const { getRootProps, getInputProps } = useDropzone({

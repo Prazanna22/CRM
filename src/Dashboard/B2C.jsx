@@ -158,8 +158,8 @@ export const B2C = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <div className="max-h-[74vh] overflow-y-auto border border-gray-300">
-                    <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
+                <div className="h-[73vh] overflow-y-auto border border-gray-300">
+                    <table className="w-full min-w-[1200px] ">
                         <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>
                                 {headers.map((header, index) => (
@@ -246,7 +246,7 @@ export const B2C = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={21} className="text-center p-4 text-sm">
+                                    <td colSpan={21} className="text-center p-4 ">
                                         No data available
                                     </td>
                                 </tr>

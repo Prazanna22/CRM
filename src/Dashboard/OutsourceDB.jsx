@@ -8,8 +8,15 @@ export const OutsourceDB = () => {
     const [filter, setFilter] = useState("year");
     const [start, setStart] = useState(false);
 
-
     const startCall = async () => {
+        // ✅ Check if at least one row has status === "new"
+        const hasNewLead = filteredData.some(row => row.status?.toLowerCase() === "new");
+
+        if (!hasNewLead) {
+            toast.warning("No new leads to call");
+            return;
+        }
+
         try {
             const response = await fetch("https://hogist.com/food-api/call-ai-agent/", {
                 method: "GET",
@@ -17,25 +24,22 @@ export const OutsourceDB = () => {
                     "ngrok-skip-browser-warning": "true"
                 }
             });
-            
+
             const result = await response.json();
             setStart(true);
 
             if (response.ok) {
-                // alert("Call process started successfully.");
                 toast.success("Call started successfully!");
-                console.log("Call result:", response);
+                console.log("Call result:", result);
             } else {
                 toast.error("Failed to trigger call process.");
-                // alert("Failed to trigger call process.");
             }
         } catch (error) {
-            
             console.error("Error starting call process:", error);
-            toast.error("Error starting call process:");
-            // alert("An error occurred while starting the call process.");
+            toast.error("Error starting call process");
         }
     };
+
     const stopCall = async () => {
         try {
             const response = await fetch("https://hogist.com/food-api/stop-call/", {
@@ -49,7 +53,7 @@ export const OutsourceDB = () => {
             setStart(false)
             if (response.ok) {
                 //alert("Call process stopped successfully.");
-            toast.success("Call process stopped successfully");
+                toast.success("Call process stopped successfully");
             } else {
                 //alert("Failed to stop the call process.");
                 toast.error("Failed to stop the call process.");
@@ -90,7 +94,7 @@ export const OutsourceDB = () => {
 
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
-           <span className="loader"></span>
+        <span className="loader"></span>
     </div>;
     if (error) return; <div className="flex justify-center items-center h-screen w-full">
         <p className="text-center p-4 text-red-500 flex justify-center">{error}</p>
@@ -131,8 +135,8 @@ export const OutsourceDB = () => {
                         onClick={startCall}
                         disabled={start}
                         className={`px-4 py-1 text-md rounded my-2 cursor-pointer ${start
-                                ? "bg-gray-400 text-white cursor-not-allowed"
-                                : "bg-green-600 text-white hover:bg-green-700"
+                            ? "bg-gray-400 text-white cursor-not-allowed"
+                            : "bg-green-600 text-white hover:bg-green-700"
                             }`}
                     >
                         {start ? "Calling..." : "Start Call"}
@@ -141,8 +145,8 @@ export const OutsourceDB = () => {
                 </div>
             </div>
             <div className="overflow-x-auto">
-                <div className="max-h-[74vh] overflow-y-auto border border-gray-300">
-                    <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
+                <div className="h-[73vh] overflow-y-auto border border-gray-300">
+                    <table className="w-full min-w-[1200px] ">
                         <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>
                                 {[
@@ -166,7 +170,15 @@ export const OutsourceDB = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.Address || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.contact_number}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.mail_id || "N/A"}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm font-medium">
+                                            <span className={`px-3 py-1 rounded-full capitalize text-white
+                                                    ${row.status?.toLowerCase() === 'called' ? 'bg-green-600' :
+                                                    row.status?.toLowerCase() === 'initiated' ? 'bg-blue-600' :
+                                                        row.status?.toLowerCase() === 'pending' ? 'bg-orange-400' : 'bg-red-600'}`}>
+                                                {row.status || "N/A"}
+                                            </span>
+                                        </td>
+
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.source_come_from || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
                                     </tr>

@@ -189,8 +189,8 @@ export const B2B = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <div className="max-h-[74vh] border border-gray-300 overflow-y-auto">
-                    <table className="w-full min-w-[1200px] border-collapse border border-gray-300">
+                <div className="h-[73vh] border border-gray-300 overflow-y-auto">
+                    <table className="w-full min-w-[1200px] ">
                         <thead className="bg-gray-200 sticky top-0 z-10">
                             <tr>
                                 {headers.map((header, index) => (
@@ -251,7 +251,7 @@ export const B2B = () => {
                         <tbody>
                             {filteredData.length > 0 ? (
                                 filteredData.map((row, index) => (
-                                    <tr key={index} className="hover:bg-gray-900">
+                                    <tr key={index} className="hover:bg-gray-900 ">
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.name || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.contact_number}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.alternate_number || "N/A"}</td>
@@ -279,7 +279,7 @@ export const B2B = () => {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={23} className="text-center p-4">No data available</td>
+                                    <td colSpan={23} className="text-center p-4 ">No data available</td>
                                 </tr>
                             )}
                         </tbody>
