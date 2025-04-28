@@ -41,6 +41,11 @@ export const OutsourceDB = () => {
     };
 
     const stopCall = async () => {
+        if (!start) {
+            toast.warning("No call is currently running to stop.");
+            return;  //  Exit early if no call was started
+        }
+    
         try {
             const response = await fetch("https://hogist.com/food-api/stop-call/", {
                 method: "POST",
@@ -48,22 +53,21 @@ export const OutsourceDB = () => {
                     "ngrok-skip-browser-warning": "true"
                 }
             });
-
+    
             const result = await response.json();
-            setStart(false)
+            setStart(false);
+    
             if (response.ok) {
-                //alert("Call process stopped successfully.");
                 toast.success("Call process stopped successfully");
             } else {
-                //alert("Failed to stop the call process.");
                 toast.error("Failed to stop the call process.");
             }
         } catch (error) {
             console.error("Error stopping call process:", error);
             toast.error("Error stopping call process:");
-            // alert("An error occurred while trying to stop the call process.");
         }
     };
+    
 
 
     useEffect(() => {
