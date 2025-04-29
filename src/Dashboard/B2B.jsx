@@ -272,15 +272,17 @@ export const B2B = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
-                                        {/* <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">
-                                            <span className={`px-3 py-1 rounded-full capitalize text-white
-                                                        ${row.lead_status?.toLowerCase() === 'hot' ? 'bg-green-600' :
-                                                        row.lead_status?.toLowerCase() === 'warm' ? 'bg-orange-400' :
-                                                        row.lead_status?.toLowerCase() === 'cold' ? 'bg-red-600' :
-                                                            'bg-gray-400'}`}>{row.lead_score || "N/A"}
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm">
+                                            <span className={`px-3 py-1 rounded-full text-white text-xs font-semibold capitalize
+                                                    ${row.lead_status?.toLowerCase() === 'hot' ? 'bg-green-600' :
+                                                    row.lead_status?.toLowerCase() === 'warm' ? 'bg-orange-400' :
+                                                        row.lead_status?.toLowerCase() === 'cold' ? 'bg-red-700' :
+                                                            row.lead_status?.toLowerCase() === 'not interested' ? 'bg-gray-500' :
+                                                                'bg-gray-600'
+                                                }`}>
+                                                {row.lead_score !== undefined && row.lead_score !== null ? row.lead_score : "N/A"}
                                             </span>
-                                        </td> */}
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.lead_score}</td>
+                                        </td>
 
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.call_id}</td>
                                     </tr>

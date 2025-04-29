@@ -12,7 +12,7 @@ export const B2C = () => {
     const [statusFilter, setStatusFilter] = useState("all");
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    
+
     const exportToExcel = (data, fileName = "ExportedData") => {
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
@@ -69,7 +69,7 @@ export const B2C = () => {
         setTableData(sortedData);
         setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     };
-    
+
     const filteredData = tableData.filter((row) => {
         // Date filtering
         const createdData = new Date(row.created_at);
@@ -240,7 +240,17 @@ export const B2C = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.lead_score}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm">
+                                            <span className={`px-3 py-1 rounded-full text-white text-xs font-semibold capitalize
+                                                    ${row.lead_status?.toLowerCase() === 'hot' ? 'bg-green-600' :
+                                                    row.lead_status?.toLowerCase() === 'warm' ? 'bg-orange-400' :
+                                                        row.lead_status?.toLowerCase() === 'cold' ? 'bg-red-700' :
+                                                            row.lead_status?.toLowerCase() === 'not interested' ? 'bg-gray-500' :
+                                                                'bg-gray-600'
+                                                }`}>
+                                                {row.lead_score !== undefined && row.lead_score !== null ? row.lead_score : "N/A"}
+                                            </span>
+                                        </td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.call_id}</td>
                                     </tr>
                                 ))
