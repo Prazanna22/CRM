@@ -96,7 +96,6 @@ export const OutsourceDB = () => {
     }, []);
 
 
-
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
         <span className="loader"></span>
     </div>;
