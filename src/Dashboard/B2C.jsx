@@ -203,8 +203,7 @@ export const B2C = () => {
                                                             <div className="mt-2 text-right">
                                                                 <button
                                                                     className="text-xs text-blue-600 hover:underline"
-                                                                    onClick={() => setSelectedStatuses([])}
-                                                                >
+                                                                    onClick={() => setSelectedStatuses([])}>
                                                                     Clear All
                                                                 </button>
                                                             </div>
