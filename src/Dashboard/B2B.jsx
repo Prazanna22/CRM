@@ -122,10 +122,9 @@ export const B2B = () => {
     const handleStatusUpdate = async (row) => {
         try {
             const requestPayload = {
-                event_type: "b2b", // Try "B2B" if this doesn't work
+                event_type: "b2b", 
                 contact_number: row.contact_number,
-                status: newStatusValue, // Changed from 'status' to 'lead_status'
-                // Add any other required fields from your backend
+                status: newStatusValue, 
             };
     
             console.log("Sending update payload:", requestPayload);
@@ -341,7 +340,6 @@ export const B2B = () => {
                                                 </div>
                                             )}
                                         </td>
-
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm">

@@ -203,6 +203,7 @@
 // };
 
 import { useState, useEffect } from "react";
+import { BiRefresh } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 export const OutsourceDB = () => {
@@ -273,32 +274,30 @@ export const OutsourceDB = () => {
     };
 
 
+    const fetchData = async () => {
+        setLoading(true);  // <-- Show loader while fetching
+        try {
+            const response = await fetch("https://hogist.com/food-api/outsource/", {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "ngrok-skip-browser-warning": "true"
+                },
+            });
+            const res = await response.json();
+            setTableData(Array.isArray(res) ? res : []);
+        } catch (err) {
+            console.error("Error fetching data:", err);
+            setError(err.message || "Failed to load data.");
+        } finally {
+            setLoading(false);  // <-- Stop loader
+        }
+    };
+    
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch("https://hogist.com/food-api/outsource/", {
-
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        "ngrok-skip-browser-warning": "true"
-                    },
-                })
-                const res = await response.json();
-                console.log("FULL Response:", res);
-                setTableData(Array.isArray(res) ? res : []);
-            } catch (err) {
-                console.error("Error fetching data:", err);
-                setError(err.message || "Failed to load data.");
-            }
-            finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
+        fetchData();  // initial load
     }, []);
-
 
 
     if (loading) return <div className="flex justify-center items-center h-screen w-full">
@@ -330,11 +329,19 @@ export const OutsourceDB = () => {
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">OutSource Database</h1>
             <div className="flex justify-between gap-10">
 
+                <div className="flex items-center gap-5">
                 <select value={filter} onChange={(e) => setFilter(e.target.value)} className="cursor-pointer  border rounded border-white py-1 px-4 my-2 ">
                     <option value="year" className=" cursor-pointer bg-black">This Year</option>
                     <option value="month" className="cursor-pointer bg-black">This Month</option>
                     <option value="today" className=" cursor-pointer appearance-none focus:outline-none  bg-black">Today</option>
                 </select>
+                <button
+                        className=" border border-white text-white px-4 py-1 text-md rounded cursor-pointer  my-2"
+                        onClick={fetchData}
+                    >
+                        <BiRefresh size={24}/>
+                    </button>
+                </div>
                 <div className="flex flex-col md:flex-row md:gap-5 ">
                     <button className="bg-red-600 text-white px-4 py-1 text-md rounded cursor-pointer hover:bg-red-700 my-2 " onClick={stopCall}>
                         Stop Call

@@ -92,6 +92,7 @@
 
 
 import React, { useEffect, useState } from 'react';
+import { BiUser } from 'react-icons/bi';
 
 export const WhatsappChatBot = () => {
     const [contacts, setContacts] = useState([]);
@@ -156,46 +157,52 @@ export const WhatsappChatBot = () => {
     };
 
     return (
-        <div className="flex w-full h-screen text-white p-5 bg-gray-900">
-            {/* Left Panel - Contacts */}
-            <div className="w-1/3 border-r border-gray-600 overflow-y-auto">
-                <h2 className="text-lg font-semibold p-4 border-b border-gray-600">Chat Contacts</h2>
-                {contacts.map((number) => (
-                    <button
-                        key={number}
-                        onClick={() => fetchConversation(number)}
-                        className={`w-full text-left px-4 py-2 hover:bg-gray-700 ${
-                            selectedNumber === number ? 'bg-gray-700 font-bold' : ''
-                        }`}
-                    >
-                        {number}
-                    </button>
-                ))}
-            </div>
-
-            {/* Right Panel - Messages */}
-            <div className="w-2/3 px-6 overflow-y-auto text-white">
-                <h2 className="text-lg font-semibold mb-4">Conversation with {selectedNumber}</h2>
-                <div className="space-y-2">
-                    {messages.length === 0 && <p>Select a contact to view the chat</p>}
-                    {messages.map((msg, idx) => (
-                        <div
-                            key={idx}
-                            className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-                        >
-                            <div
-                                className={`max-w-xs px-4 py-2 rounded-lg text-sm ${
-                                    msg.sender === "user"
-                                        ? "bg-blue-600 text-white rounded-br-none"
-                                        : "bg-gray-200 text-black rounded-bl-none"
-                                }`}
-                            >
-                                {msg.message}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
+        <>
+         <div className="py-6 px-4">
+         <div className="flex w-full h-[93vh] text-white  border-2 border-gray-800  ">
+             {/* Left Panel - Contacts */}
+             <div className="w-1/3 border-r border-gray-800 overflow-y-auto">
+                 <h2 className="text-lg font-semibold p-4 border-b border-gray-800">Chat Contacts</h2>
+                 {contacts.map((number) => (
+                     <button
+                         key={number}
+                         onClick={() => fetchConversation(number)}
+                         className={`w-full text-left px-4 py-4  cursor-pointer ${
+                             selectedNumber === number ? 'bg-gray-800 font-bold' : ''
+                         }`}
+                     >
+                         {number}
+                     </button>
+                 ))}
+             </div>
+             {/* Right Panel - Messages */}
+             <div className="w-2/3 px-6 overflow-y-auto text-white">
+             <div className="flex items-center gap-2">
+                 <h1 className='bg-green-600 p-2 rounded-full'><BiUser size={20} /> </h1>
+                 <h2 className="text-lg font-semibold my-4 ">Conversation with {selectedNumber}</h2>
+             </div>              
+                 <div className="space-y-2">
+                     {messages.length === 0 && <p>Select a contact to view the chat</p>}
+                     {messages.map((msg, idx) => (
+                         <div
+                             key={idx}
+                             className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                         >
+                             <div
+                                 className={`max-w-xs px-4 py-2 rounded-lg text-sm ${
+                                     msg.sender === "user"
+                                         ? "bg-green-600 text-white rounded-br-none"
+                                         : "bg-gray-200 text-black rounded-bl-none"
+                                 }`}
+                             >
+                                 {msg.message}
+                             </div>
+                         </div>
+                     ))}
+                 </div>
+             </div>
+         </div>
+         </div>
+         </>
     );
 };

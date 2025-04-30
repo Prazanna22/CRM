@@ -12,6 +12,8 @@ export const B2C = () => {
     const [statusFilter, setStatusFilter] = useState("all");
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [editingStatus, setEditingStatus] = useState(null);
+    const [newStatusValue, setNewStatusValue] = useState("");
 
     const exportToExcel = (data, fileName = "ExportedData") => {
         const worksheet = XLSX.utils.json_to_sheet(data);
@@ -108,6 +110,59 @@ export const B2C = () => {
                 return <span className={`${baseClass} bg-gray-500`}>Not Interested</span>;
             default:
                 return <span className={`${baseClass} bg-gray-600`}>N/A</span>;
+        }
+    };
+
+    const handleStatusUpdate = async (row) => {
+        try {
+            const requestPayload = {
+                event_type: "b2c", 
+                contact_number: row.contact_number,
+                status: newStatusValue, 
+            };
+    
+            console.log("Sending update payload:", requestPayload);
+    
+            const response = await fetch("https://hogist.com/food-api/update-lead-status/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "ngrok-skip-browser-warning": "true",
+                },
+                body: JSON.stringify(requestPayload),
+            });
+    
+            if (!response.ok) {
+                // Try to get more detailed error info
+                let errorData;
+                try {
+                    errorData = await response.json();
+                    console.error("Detailed error response:", errorData);
+                } catch (e) {
+                    console.error("Couldn't parse error response");
+                    errorData = { message: await response.text() };
+                }
+                
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+    
+    
+            // Optional: Refresh all data from server
+            const updatedDataResponse = await fetch("https://hogist.com/food-api/get_b2c/");
+            const updatedData = await updatedDataResponse.json();
+            setTableData(updatedData);
+            console.log(updatedData);
+            
+    
+            setEditingStatus(null);
+            setNewStatusValue("");
+    
+        } catch (err) {
+            console.error("Update failed:", err);
+            alert(`Status update failed: ${err.message}`);
+            
+            // Revert optimistic update on failure
+            setTableData(prevData => [...prevData]); // This will trigger a re-render
         }
     };
 
@@ -236,7 +291,42 @@ export const B2C = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.prefered_menu_budget || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.meeting_date_time ? new Date(row.meeting_date_time).toLocaleString() : "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{getStatusBadge(row.lead_status)}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200 relative">
+                                            <div className="flex items-center">
+                                                <span className="mr-2">{row.status || "N/A"}</span>
+                                                <button 
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setEditingStatus(row.id);
+                                                        setNewStatusValue(row.status || "");
+                                                    }}
+                                                    className=" text-white px-2 py-1 rounded-full border border-white text-xs"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                            
+                                            {editingStatus === row.id && (
+                                                <div 
+                                                    className="absolute z-10   shadow-lg mt-1 left-0 right-0"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <input
+                                                        type="text"
+                                                        value={newStatusValue}
+                                                        onChange={(e) => setNewStatusValue(e.target.value)}
+                                                        className="w-36 bg-gray-800 py-2 pl-2 text-white outline-none rounded-tl rounded-bl"
+                                                        placeholder="Enter status"
+                                                    />
+                                                    <button
+                                                        onClick={() => handleStatusUpdate(row)}
+                                                        className="bg-green-600 text-white px-2 py-2  rounded-tr rounded-br text-sm"
+                                                    >
+                                                        Apply
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm">

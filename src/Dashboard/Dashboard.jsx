@@ -73,12 +73,12 @@ const Dashboard = () => {
     };
 
     const sidebarItems = [
-        { id: "home", label: "Home", icon: <FaHome size={20} /> },
-        { id: "upload", label: "Upload", icon: <FaUpload size={20} /> },
-        { id: "b2b", label: "B2B", icon: <FaTable size={20} /> },
-        { id: "b2c", label: "B2C", icon: <FaTableList size={20} /> },
-        { id: "outsource", label: "OutSourceDB", icon: <FaDatabase size={20} /> },
-        { id: "chatbot", label: "Chatbot", icon: <FaComments size={20} /> },
+        { id: "home", label: "Home", icon: <FaHome size={18} /> },
+        { id: "upload", label: "Upload", icon: <FaUpload size={18} /> },
+        { id: "b2b", label: "B2B", icon: <FaTable size={18} /> },
+        { id: "b2c", label: "B2C", icon: <FaTableList size={18} /> },
+        { id: "outsource", label: "OutSourceDB", icon: <FaDatabase size={18} /> },
+        { id: "chatbot", label: "Chatbot", icon: <FaComments size={18} /> },
     ];
 
     return (
@@ -95,7 +95,7 @@ const Dashboard = () => {
 
                             <button className="py-2  pl-4 flex items-center justify-start gap-4 mb-4 cursor-pointer border-l-4 border-gray-800" onClick={() => setIsCollapsed(!isCollapsed)}>
                                 <span className="transition-all duration-300 ease-in-out transform" >
-                                    {isCollapsed ? <FaChevronRight size={20} /> : <FaChevronLeft size={20} />}
+                                    {isCollapsed ? <FaChevronRight size={18} /> : <FaChevronLeft size={18} />}
                                 </span>
                                 <span
                                     className={`font-medium transition-all duration-300 ease-in-out origin-left ${isCollapsed ? 'opacity-0 scale-x-0 w-0' : 'opacity-100 scale-x-100 w-auto'
@@ -140,7 +140,7 @@ const Dashboard = () => {
                                     onClick={() => setIsActive((prev) => !prev)}
                                 >
                                     <span className="transition-all duration-300 ease-in-out transform">
-                                        <FaUser size={20} />
+                                        <FaUser size={18} />
                                     </span>
                                     <span
                                         className={`font-medium transition-all duration-300 ease-in-out origin-left ${isCollapsed ? "opacity-0 scale-x-0 w-0" : "opacity-100 scale-x-100 w-auto"
@@ -224,8 +224,8 @@ const Dashboard = () => {
                             </div>
                             <div className="mt-auto">
                                 <button onClick={HandlefetchData} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-white hover:bg-gray-800"
-                         > <FaGetPocket size={20} /> <span>Fetch</span></button>
-                                <button onClick={handleLogout} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-red-400 hover:bg-gray-800"> <FaUser size={20} /> <span>Logout</span>
+                         > <FaGetPocket size={18} /> <span>Fetch</span></button>
+                                <button onClick={handleLogout} className="flex items-center gap-4 py-2 px-4 rounded-md w-full text-red-400 hover:bg-gray-800"> <FaUser size={18} /> <span>Logout</span>
                                 </button>
                             </div>
                         </div>
