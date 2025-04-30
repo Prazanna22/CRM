@@ -52,25 +52,25 @@ const Dashboard = () => {
         window.location.reload();
     };
 
-    const HandlefetchData = async () => {
-        try {
-            const response = await fetch("https://hogist.com/food-api/fetch-bot-leads/", {
-                method: "GET",
-                headers: {
-                    "ngrok-skip-browser-warning": "true"
-                }
-            });
-            const result = await response.json();
-            if (response.ok) {
-                alert("Data fetched successfully");
-                console.log("Call result:", result);
-            } else {
-                alert("Failed to fetch");
-            }
-        } catch (error) {
-            console.error("Error while fetch:", error);
-        }
-    };
+    // const HandlefetchData = async () => {
+    //     try {
+    //         const response = await fetch("https://hogist.com/food-api/fetch-bot-leads/", {
+    //             method: "GET",
+    //             headers: {
+    //                 "ngrok-skip-browser-warning": "true"
+    //             }
+    //         });
+    //         const result = await response.json();
+    //         if (response.ok) {
+    //             alert("Data fetched successfully");
+    //             console.log("Call result:", result);
+    //         } else {
+    //             alert("Failed to fetch");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error while fetch:", error);
+    //     }
+    // };
 
     const sidebarItems = [
         { id: "home", label: "Home", icon: <FaHome size={18} /> },
@@ -124,7 +124,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="flex flex-col ">
-                            <button className={`py-3 pl-4 px-1 flex items-center gap-4 my-2 cursor-pointer  justify-left }`} onClick={HandlefetchData}>
+                            {/* <button className={`py-3 pl-4 px-1 flex items-center gap-4 my-2 cursor-pointer  justify-left }`} onClick={HandlefetchData}>
                                 <span className="transition-all duration-300 ease-in-out transform" >
                                     <FaGetPocket size={24} />
                                 </span>
@@ -133,7 +133,7 @@ const Dashboard = () => {
                                         } overflow-hidden whitespace-nowrap`}>
                                     Fetch
                                 </span>
-                            </button>
+                            </button> */}
                             <div className="relative z-50 overflow-visible" ref={profileRef}>
                                 <button
                                     className="py-2 pl-4 flex items-center gap-4 my-2 justify-left cursor-pointer"
