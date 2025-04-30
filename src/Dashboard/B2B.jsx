@@ -121,37 +121,36 @@ export const B2B = () => {
 
     const handleStatusUpdate = async (row) => {
         try {
+            const requestPayload = {
+                event_type: "b2b",
+                contact_number: row.contact_number,
+                status: newStatusValue, 
+            };
+    
+            console.log("Request Payload:", requestPayload); // Log the payload for debugging
+    
             const response = await fetch("https://hogist.com/food-api/update-lead-status/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "ngrok-skip-browser-warning": "true",
                 },
-                body: JSON.stringify({
-                    event_type: "b2b",
-                    contact_number: row.contact_number,
-                    lead_status: newStatusValue // Changed from status to lead_status
-                }),
+                body: JSON.stringify(requestPayload),
             });
     
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
+                console.error("Backend error response:", errorData);
                 throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
             }
     
-            // Update both status and lead_status in local state
-            setTableData(prevData =>
-                prevData.map(item =>
-                    item.id === row.id 
-                        ? { 
-                            ...item, 
-                            status: newStatusValue,
-                            lead_status: newStatusValue 
-                        } 
-                        : item
-                )
-            );
-            
+            // Fetch the updated data from the backend after status is updated
+            const updatedDataResponse = await fetch("https://hogist.com/food-api/get_b2b/");
+            const updatedData = await updatedDataResponse.json();
+    
+            // Update the table with the latest data
+            setTableData(updatedData);
+    
             setEditingStatus(null);
             setNewStatusValue("");
         } catch (err) {
@@ -159,6 +158,8 @@ export const B2B = () => {
             alert(`Status update failed: ${err.message}`);
         }
     };
+    
+    
 
     const headers = [
         "Name",
