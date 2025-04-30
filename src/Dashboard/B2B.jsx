@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from "react";
 import { FaArrowDown, FaArrowUp, FaFilter } from "react-icons/fa";
 import * as XLSX from "xlsx";
@@ -11,41 +13,19 @@ export const B2B = () => {
     const [filter, setFilter] = useState("year");
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
-    // const handleExport = async () => {
-    //     try {
-    //         const response = await fetch("https://hogist.com/food-api/export_b2b/", {
-    //             method: "GET",
-    //             headers: {
-    //                 "ngrok-skip-browser-warning": "true",
-    //             }
-    //         });
-
-    //         if (!response.ok) {
-    //             throw new Error("Failed to export file");
-    //         }
-
-    //         const blob = await response.blob();
-    //         const url = window.URL.createObjectURL(blob);
-    //         const a = document.createElement("a");
-    //         a.href = url;
-    //         a.download = "B2B_Leads.xlsx"; // or whatever name you want
-    //         document.body.appendChild(a);
-    //         a.click();
-    //         a.remove();
-    //         window.URL.revokeObjectURL(url);
-    //     } catch (error) {
-    //         console.error("Export error:", error); 
-    //         alert("Failed to download export file.");
-    //     }
-    // };
+    const [editingStatus, setEditingStatus] = useState(null);
+    const [newStatusValue, setNewStatusValue] = useState("");
 
     useEffect(() => {
-        const handleClickOutside = () => setDropdownOpen(false);
+        const handleClickOutside = () => {
+            setDropdownOpen(false);
+            if (editingStatus !== null) {
+                setEditingStatus(null);
+            }
+        };
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
-    }, []);
-
+    }, [editingStatus]);
 
     const exportToExcel = (data, fileName = "ExportedData") => {
         const worksheet = XLSX.utils.json_to_sheet(data);
@@ -127,7 +107,7 @@ export const B2B = () => {
         let baseClass = "text-white px-4 py-1 rounded-full text-xs font-semibold capitalize";
         switch (status?.toLowerCase()) {
             case "cold":
-                return <span className={`${baseClass} bg-red-700 `}>Cold</span>;
+                return <span className={`${baseClass} bg-red-700`}>Cold</span>;
             case "warm":
                 return <span className={`${baseClass} bg-orange-400`}>Warm</span>;
             case "hot":
@@ -136,6 +116,47 @@ export const B2B = () => {
                 return <span className={`${baseClass} bg-gray-500`}>Not Interested</span>;
             default:
                 return <span className={`${baseClass} bg-gray-600`}>N/A</span>;
+        }
+    };
+
+    const handleStatusUpdate = async (row) => {
+        try {
+            const response = await fetch("https://hogist.com/food-api/update-lead-status/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "ngrok-skip-browser-warning": "true",
+                },
+                body: JSON.stringify({
+                    event_type: "b2b",
+                    contact_number: row.contact_number,
+                    lead_status: newStatusValue // Changed from status to lead_status
+                }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+    
+            // Update both status and lead_status in local state
+            setTableData(prevData =>
+                prevData.map(item =>
+                    item.id === row.id 
+                        ? { 
+                            ...item, 
+                            status: newStatusValue,
+                            lead_status: newStatusValue 
+                        } 
+                        : item
+                )
+            );
+            
+            setEditingStatus(null);
+            setNewStatusValue("");
+        } catch (err) {
+            console.error("Update failed:", err);
+            alert(`Status update failed: ${err.message}`);
         }
     };
 
@@ -170,7 +191,7 @@ export const B2B = () => {
             <h1 className="font-bold text-4xl text-green-600 text-center py-5">B2B</h1>
             <div className="flex flex-wrap items-center gap-4 mb-4">
                 <button
-                    onClick={() => exportToExcel(filteredData, "B2C_Leads")}
+                    onClick={() => exportToExcel(filteredData, "B2B_Leads")}
                     className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-700"
                 >
                     Export file
@@ -269,7 +290,43 @@ export const B2B = () => {
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.prefered_menu_budget || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.meeting_date_time ? new Date(row.meeting_date_time).toLocaleString() : "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{getStatusBadge(row.lead_status)}</td>
-                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.status || "N/A"}</td>
+                                        <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200 relative">
+                                            <div className="flex items-center">
+                                                <span className="mr-2">{row.status || "N/A"}</span>
+                                                <button 
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setEditingStatus(row.id);
+                                                        setNewStatusValue(row.status || "");
+                                                    }}
+                                                    className=" text-white px-2 py-1 rounded-full border border-white text-xs"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                            
+                                            {editingStatus === row.id && (
+                                                <div 
+                                                    className="absolute z-10 bg-gray-800  rounded-tl rounded-bl shadow-lg mt-1 left-0 right-0"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <input
+                                                        type="text"
+                                                        value={newStatusValue}
+                                                        onChange={(e) => setNewStatusValue(e.target.value)}
+                                                        className="w-full  py-2 pl-2 text-white outline-none"
+                                                        placeholder="Enter status"
+                                                    />
+                                                    <button
+                                                        onClick={() => handleStatusUpdate(row)}
+                                                        className="bg-green-600 text-white px-2 py-2  rounded-tr rounded-br text-sm"
+                                                    >
+                                                        Apply
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </td>
+
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{row.remark || "N/A"}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm text-gray-200">{new Date(row.created_at).toLocaleString()}</td>
                                         <td className="px-3 py-5 whitespace-nowrap text-sm">

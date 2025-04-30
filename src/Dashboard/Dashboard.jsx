@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import UploadFile from "./UploadFile";
-import { FaUpload, FaChevronLeft, FaChevronRight, FaHome, FaDatabase, FaGetPocket } from "react-icons/fa";
+import { FaUpload, FaChevronLeft, FaChevronRight, FaHome, FaDatabase, FaGetPocket, FaComments } from "react-icons/fa";
 import { Home } from "./Home";
 import { B2B } from "./B2B";
 import { B2C } from "./B2C";
@@ -9,6 +9,7 @@ import { OutsourceDB } from "./OutsourceDB";
 import { FaTable, FaTableList } from "react-icons/fa6";
 import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { WhatsappChatBot } from "./WhatsappChatBot";
 
 
 
@@ -77,6 +78,7 @@ const Dashboard = () => {
         { id: "b2b", label: "B2B", icon: <FaTable size={20} /> },
         { id: "b2c", label: "B2C", icon: <FaTableList size={20} /> },
         { id: "outsource", label: "OutSourceDB", icon: <FaDatabase size={20} /> },
+        { id: "chatbot", label: "Chatbot", icon: <FaComments size={20} /> },
     ];
 
     return (
@@ -102,7 +104,7 @@ const Dashboard = () => {
                                     Close
                                 </span>
                             </button>
-                            <div className="flex flex-col gap-8 ">
+                            <div className="flex flex-col gap-5 ">
                                 {sidebarItems.map(({ id, label, icon }) => (
                                     <button
                                         key={id}
@@ -238,6 +240,7 @@ const Dashboard = () => {
                         {activeSection === "b2b" && <B2B />}
                         {activeSection === "b2c" && <B2C />}
                         {activeSection === "outsource" && <OutsourceDB />}
+                        {activeSection === "chatbot" && <WhatsappChatBot />}
                     </div>
                 </div>
             </div>

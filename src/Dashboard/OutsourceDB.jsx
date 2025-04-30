@@ -213,14 +213,9 @@ export const OutsourceDB = () => {
     const [start, setStart] = useState(false);
 
     const startCall = async () => {
-        // ✅ Check if at least one row has status === "new"
-        const hasNewLead = filteredData.some(row => row.status?.toLowerCase() === "new");
-
-        if (!hasNewLead) {
-            toast.warning("No new leads to call");
-            return;
-        }
-
+        toast.info("📞 Calling process started...");
+        setStart(true);
+    
         try {
             const response = await fetch("https://hogist.com/food-api/call-ai-agent/", {
                 method: "GET",
@@ -228,28 +223,33 @@ export const OutsourceDB = () => {
                     "ngrok-skip-browser-warning": "true"
                 }
             });
-
+    
             const result = await response.json();
-            setStart(true);
-
+    
             if (response.ok) {
-                toast.success("Call started successfully!");
-                console.log("Call result:", result);
+                toast.success("✅ Call process triggered successfully");
+                console.log("✅ Backend call sequencing started:", result);
             } else {
-                toast.error("Failed to trigger call process.");
+                toast.error("❌ Failed to trigger call process");
+                console.error("Error response:", result);
             }
-        } catch (error) {
-            console.error("Error starting call process:", error);
-            toast.error("Error starting call process");
+    
+        } catch (err) {
+            toast.error("❌ Error starting call process");
+            console.error("❌ Fetch error:", err);
         }
+    
+        setStart(false);
     };
+    
+
 
     const stopCall = async () => {
         if (!start) {
             toast.warning("No call is currently running to stop.");
             return;  //  Exit early if no call was started
         }
-    
+
         try {
             const response = await fetch("https://hogist.com/food-api/stop-call/", {
                 method: "POST",
@@ -257,10 +257,10 @@ export const OutsourceDB = () => {
                     "ngrok-skip-browser-warning": "true"
                 }
             });
-    
+
             const result = await response.json();
             setStart(false);
-    
+
             if (response.ok) {
                 toast.success("Call process stopped successfully");
             } else {
@@ -268,10 +268,10 @@ export const OutsourceDB = () => {
             }
         } catch (error) {
             console.error("Error stopping call process:", error);
-            toast.error("Error stopping call process:");
+            toast.error("Error stopping call process:", error);
         }
     };
-    
+
 
 
     useEffect(() => {
