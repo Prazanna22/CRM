@@ -122,12 +122,13 @@ export const B2B = () => {
     const handleStatusUpdate = async (row) => {
         try {
             const requestPayload = {
-                event_type: "b2b",
+                event_type: "b2b", // Try "B2B" if this doesn't work
                 contact_number: row.contact_number,
-                status: newStatusValue, 
+                status: newStatusValue, // Changed from 'status' to 'lead_status'
+                // Add any other required fields from your backend
             };
     
-            console.log("Request Payload:", requestPayload); // Log the payload for debugging
+            console.log("Sending update payload:", requestPayload);
     
             const response = await fetch("https://hogist.com/food-api/update-lead-status/", {
                 method: "POST",
@@ -139,23 +140,36 @@ export const B2B = () => {
             });
     
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                console.error("Backend error response:", errorData);
+                // Try to get more detailed error info
+                let errorData;
+                try {
+                    errorData = await response.json();
+                    console.error("Detailed error response:", errorData);
+                } catch (e) {
+                    console.error("Couldn't parse error response");
+                    errorData = { message: await response.text() };
+                }
+                
                 throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
             }
     
-            // Fetch the updated data from the backend after status is updated
+    
+            // Optional: Refresh all data from server
             const updatedDataResponse = await fetch("https://hogist.com/food-api/get_b2b/");
             const updatedData = await updatedDataResponse.json();
-    
-            // Update the table with the latest data
             setTableData(updatedData);
+            console.log(updatedData);
+            
     
             setEditingStatus(null);
             setNewStatusValue("");
+    
         } catch (err) {
             console.error("Update failed:", err);
             alert(`Status update failed: ${err.message}`);
+            
+            // Revert optimistic update on failure
+            setTableData(prevData => [...prevData]); // This will trigger a re-render
         }
     };
     
